@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="370" viewBox="0 0 820 370" role="img" aria-labelledby="title desc">
+<title id="title">Task waiting, execution and response time</title>
+<desc id="desc">Task released at 0 milliseconds, starts at 4 milliseconds after waiting 4 milliseconds, executes for 9 milliseconds, and completes at 13 milliseconds. Total response time is 13 milliseconds.</desc>
+<rect width="820" height="370" fill="#000000"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8" font-size="29">
+<text x="50" y="53" text-anchor="middle">0 ms</text>
+<text x="259" y="53" text-anchor="middle">4 ms</text>
+<text x="728" y="53" text-anchor="middle">13 ms</text>
+</g>
+<rect x="51" y="102" width="207" height="85" rx="5" fill="#483216"/>
+<rect x="260" y="102" width="467" height="85" rx="5" fill="#08433f"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#e8e8e8" text-anchor="middle">
+<text x="155" y="155">Waiting</text>
+<text x="493" y="155">Executing</text>
+<text x="155" y="243">4 ms</text>
+<text x="493" y="243">9 ms</text>
+<text x="389" y="347">Response time = 13 ms</text>
+</g>
+<g stroke="#e8e8e8" stroke-width="3.5">
+<line x1="50" y1="82" x2="50" y2="208"/>
+<line x1="259" y1="82" x2="259" y2="208"/>
+<line x1="728" y1="82" x2="728" y2="208"/>
+</g>
+<path d="M50 277 V300 H728 V277" fill="none" stroke="#32b6f4" stroke-width="4"/>
+</svg>

@@ -1,0 +1,2694 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning resources for robotics engineering">
+      
+      
+      
+        <link rel="canonical" href="https://metropolia-robotics.github.io/metropolia-robotics/real-time-systems/module-1/02-requirements/">
+      
+      
+        <link rel="prev" href="../01-introduction/">
+      
+      
+        <link rel="next" href="../03-real-time-types/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>1.2 Requirements - Robotics Learning Hub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12-real-time-requirements-in-robotics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Robotics Learning Hub" class="md-header__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robotics Learning Hub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.2 Requirements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Robotics Learning Hub" class="md-nav__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robotics Learning Hub
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Courses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-time Systems in Robotics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Real-time Systems in Robotics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - Foundations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Requirements
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-how-does-a-robot-interact-with-its-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 How does a robot interact with its environment?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.1 How does a robot interact with its environment?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-obstacle-avoidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Obstacle avoidance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-sources-of-delay-in-robotic-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2 Sources of delay in robotic systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.2 Sources of delay in robotic systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-robot-obstacle-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Robot obstacle response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this important?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-different-robotic-functions-have-different-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3 Different robotic functions have different timing requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.3 Different robotic functions have different timing requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-period-versus-deadline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution period versus deadline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-periodic-and-event-driven-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4 Periodic and Event-Driven Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.4 Periodic and Event-Driven Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#periodic-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Periodic operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-activation-versus-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Activation versus execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-driven-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event-driven operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event-driven operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-wireless-command-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Wireless command processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-periodic-versus-event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Periodic versus event-driven tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-how-robot-speed-affects-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.5 How robot speed affects timing requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.5 How robot speed affects timing requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-slow-moving-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: Slow-moving robot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-faster-moving-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: Faster-moving robot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-can-we-conclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What can we conclude?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-timing-requirements-and-task-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.6 Timing requirements and task priorities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-from-application-requirements-to-software-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.7 From application requirements to software requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.7 From application requirements to software requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-complete-response-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the complete response time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-can-we-verify-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How can we verify timing requirements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-real-time-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3 Real-time Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-timing-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.4 Timing Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-operating-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.5 Operating Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/01-sequential-concurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1 Sequential and Concurrent Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/02-multithreading.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2 Multithreading in C++
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/03-periodic-scheduling.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3 Periodic Tasks and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/04-shared-data.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4 Shared Data and Race Conditions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/05-synchronisation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.5 Synchronisation Mechanisms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/lab-2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2: Concurrent Robot Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/lab-3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3: Safe Sensor-data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ros-sw-arch/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Operating Systems and Software Architectures
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Operating Systems and Software Architectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2_2" id="__nav_2_1_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ros-sw-arch/module-1/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Software Project
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Software Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/module-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-how-does-a-robot-interact-with-its-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 How does a robot interact with its environment?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.1 How does a robot interact with its environment?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-obstacle-avoidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Obstacle avoidance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-sources-of-delay-in-robotic-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2 Sources of delay in robotic systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.2 Sources of delay in robotic systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-robot-obstacle-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Robot obstacle response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this important?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-different-robotic-functions-have-different-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3 Different robotic functions have different timing requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.3 Different robotic functions have different timing requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-period-versus-deadline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution period versus deadline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-periodic-and-event-driven-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4 Periodic and Event-Driven Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.4 Periodic and Event-Driven Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#periodic-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Periodic operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-activation-versus-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Activation versus execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-driven-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event-driven operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Event-driven operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-wireless-command-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Wireless command processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-periodic-versus-event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Periodic versus event-driven tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-how-robot-speed-affects-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.5 How robot speed affects timing requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.5 How robot speed affects timing requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-slow-moving-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: Slow-moving robot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-faster-moving-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: Faster-moving robot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-can-we-conclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What can we conclude?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-timing-requirements-and-task-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.6 Timing requirements and task priorities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-from-application-requirements-to-software-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.7 From application requirements to software requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.7 From application requirements to software requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-complete-response-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the complete response time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-can-we-verify-timing-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How can we verify timing requirements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12-real-time-requirements-in-robotics">1.2 Real-time Requirements in Robotics<a class="headerlink" href="#12-real-time-requirements-in-robotics" title="Permanent link">&para;</a></h1>
+<h2 id="121-how-does-a-robot-interact-with-its-environment">1.2.1 How does a robot interact with its environment?<a class="headerlink" href="#121-how-does-a-robot-interact-with-its-environment" title="Permanent link">&para;</a></h2>
+<p>A robot interacts with the physical world through three fundamental operations:</p>
+<ol>
+<li><strong>Sensing:</strong> Collecting information about the robot and its environment.</li>
+<li><strong>Processing:</strong> Analysing information and determining what action to take.</li>
+<li><strong>Actuation:</strong> Executing commands through motors or other actuators.</li>
+</ol>
+<p>These operations form a continuous cycle.</p>
+<h3 id="example-obstacle-avoidance">Example: Obstacle avoidance<a class="headerlink" href="#example-obstacle-avoidance" title="Permanent link">&para;</a></h3>
+<p>Consider a mobile robot equipped with a distance sensor.</p>
+<p>The robot performs the following operations:</p>
+<ol>
+<li>The sensor measures the distance to an obstacle.</li>
+<li>The controller reads the measurement.</li>
+<li>The controller determines whether the obstacle is too close.</li>
+<li>A command is sent to the motor driver.</li>
+<li>The motors respond to the command.</li>
+</ol>
+<p>The cycle repeats while the robot is operating.</p>
+<p align="center">
+  <img src="../images/flowchart.png"
+       alt="Robot feedback loop"
+       width="500">
+</p>
+
+<div class="admonition important">
+<p class="admonition-title">Key concept</p>
+<p>A robot's response depends on the complete sensing–processing–actuation chain, not only on how quickly its controller executes.</p>
+</div>
+<p>For example, even if the controller performs its calculations very quickly, a slow sensor or delayed motor response can increase the total time needed to react.</p>
+<hr />
+<h2 id="122-sources-of-delay-in-robotic-systems">1.2.2 Sources of delay in robotic systems<a class="headerlink" href="#122-sources-of-delay-in-robotic-systems" title="Permanent link">&para;</a></h2>
+<p>Every stage of the sensing–processing–actuation cycle requires some amount of time.</p>
+<p>Common sources of delay include:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensor acquisition</td>
+<td>Time needed to obtain a measurement</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>Time needed to transfer sensor data or commands</td>
+</tr>
+<tr>
+<td>Scheduling</td>
+<td>Time spent waiting for the software task to execute</td>
+</tr>
+<tr>
+<td>Processing</td>
+<td>Time required to calculate a decision</td>
+</tr>
+<tr>
+<td>Actuator response</td>
+<td>Time needed for the actuator to begin or complete the requested action</td>
+</tr>
+</tbody>
+</table>
+<p>These delays may occur at different stages of the system.</p>
+<h3 id="example-robot-obstacle-response">Example: Robot obstacle response<a class="headerlink" href="#example-robot-obstacle-response" title="Permanent link">&para;</a></h3>
+<p>Suppose a robot has the following response times:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensor measurement</td>
+<td style="text-align: right;">8 ms</td>
+</tr>
+<tr>
+<td>Sensor communication</td>
+<td style="text-align: right;">2 ms</td>
+</tr>
+<tr>
+<td>Scheduling delay</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>Controller processing</td>
+<td style="text-align: right;">4 ms</td>
+</tr>
+<tr>
+<td>Motor command communication</td>
+<td style="text-align: right;">1 ms</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>18 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p>For this simplified example, the total delay is:</p>
+<div class="arithmatex">\[
+T_{\text{response}} = 8 + 2 + 3 + 4 + 1
+\]</div>
+<div class="arithmatex">\[
+\boxed{T_{\text{response}} = 18\ \text{ms}}
+\]</div>
+<p>The calculated response time of <strong>18 ms</strong> represents the time from the beginning of the sensor measurement until the motor command is delivered.</p>
+<p>It does not include the additional time required for the motor and robot to physically slow down or stop.</p>
+<p>Furthermore, the 18 ms value represents one assumed execution scenario. It does not guarantee that every execution will complete within 18 ms. Actual response times may vary because of scheduling, communication, and other system delays.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Adding individual delays is appropriate when the operations occur sequentially without overlapping.</p>
+<p>In more complex systems, some operations may overlap, and the overall response time must be determined from the actual execution sequence.</p>
+</div>
+<h3 id="why-is-this-important">Why is this important?<a class="headerlink" href="#why-is-this-important" title="Permanent link">&para;</a></h3>
+<p>Suppose the software response deadline is 20 ms.</p>
+<p>The example system completes its response in 18 ms and therefore meets this deadline.</p>
+<p>However, it has only 2 ms of remaining time before the deadline.</p>
+<p>If scheduling or communication takes longer than expected, the deadline may be missed.</p>
+<p>This illustrates why engineers must consider the entire timing chain rather than only the processing time of the controller.</p>
+<hr />
+<h2 id="123-different-robotic-functions-have-different-timing-requirements">1.2.3 Different robotic functions have different timing requirements<a class="headerlink" href="#123-different-robotic-functions-have-different-timing-requirements" title="Permanent link">&para;</a></h2>
+<p>Not all robotic tasks need to execute at the same speed.</p>
+<p>Consider a mobile robot performing several operations simultaneously.</p>
+<table>
+<thead>
+<tr>
+<th>Robotic function</th>
+<th>Example timing requirement</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Motor control</td>
+<td>Update every 10 ms</td>
+<td>Maintain controlled motion</td>
+</tr>
+<tr>
+<td>Distance sensing</td>
+<td>Measure every 50 ms</td>
+<td>Detect nearby obstacles</td>
+</tr>
+<tr>
+<td>Localization</td>
+<td>Update every 100 ms</td>
+<td>Estimate robot position</td>
+</tr>
+<tr>
+<td>Status reporting</td>
+<td>Update every 1 s</td>
+<td>Inform the user about robot state</td>
+</tr>
+<tr>
+<td>Data logging</td>
+<td>Save data every 5 s</td>
+<td>Store information for later analysis</td>
+</tr>
+</tbody>
+</table>
+<p>These are illustrative values, not universal requirements.</p>
+<p>The appropriate timing depends on the robot's speed, hardware, control algorithms, operating environment, and system requirements.</p>
+<p>For example, a robot moving at high speed may need to detect and respond to obstacles more quickly than a slow-moving robot.</p>
+<p>Similarly, a motor controller may need frequent updates, while a user-interface display can often tolerate longer delays.</p>
+<div class="admonition tip">
+<p class="admonition-title">Remember</p>
+<p>A robotic system may contain several software tasks with different execution periods and deadlines.</p>
+<p>A central challenge in real-time programming is ensuring that important tasks meet their timing requirements while sharing limited computing resources.</p>
+</div>
+<h3 id="execution-period-versus-deadline">Execution period versus deadline<a class="headerlink" href="#execution-period-versus-deadline" title="Permanent link">&para;</a></h3>
+<p>Two important timing concepts are the <strong>period</strong> and the <strong>deadline</strong>.</p>
+<ul>
+<li><strong>Period:</strong> The time between consecutive intended activations of a recurring task.</li>
+<li><strong>Deadline:</strong> The latest time by which a task must complete, measured relative to its activation or another defined reference event.</li>
+</ul>
+<p>For example, suppose a motor-control task is activated every <strong>10 ms</strong>, but each execution must finish within <strong>5 ms</strong> of its activation.</p>
+<p>In this case:</p>
+<ul>
+<li><strong>Period:</strong> 10 ms</li>
+<li><strong>Relative deadline:</strong> 5 ms</li>
+</ul>
+<p>The task is activated every 10 ms, but it has only 5 ms to complete each execution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A task's period and deadline are not necessarily equal. Their values depend on the system's requirements.</p>
+</div>
+<hr />
+<h2 id="124-periodic-and-event-driven-operations">1.2.4 Periodic and Event-Driven Operations<a class="headerlink" href="#124-periodic-and-event-driven-operations" title="Permanent link">&para;</a></h2>
+<p>Robotic software systems often perform multiple tasks, such as reading sensors, controlling motors, and processing communication messages. These tasks do not necessarily become ready to execute at the same time or for the same reason.</p>
+<p>Two common ways of organising task activation are <strong>periodic activation</strong> and <strong>event-driven activation</strong>.</p>
+<p>Before examining these approaches, it is important to distinguish between three concepts:</p>
+<ul>
+<li><strong>Task activation (release):</strong> The moment a new instance of a task becomes ready to execute.</li>
+<li><strong>Task execution:</strong> The time during which the processor actually runs the task.</li>
+<li><strong>Task completion:</strong> The moment the task finishes its work.</li>
+</ul>
+<p>A task may become ready to execute but have to wait because the processor is busy with another task.</p>
+<div class="admonition important">
+<p class="admonition-title">Key distinction</p>
+<p><strong>Activation does not necessarily mean immediate execution.</strong></p>
+<p>A task may be activated at a particular time, but its actual execution can begin later due to scheduling delays.</p>
+</div>
+<h3 id="periodic-operations">Periodic operations<a class="headerlink" href="#periodic-operations" title="Permanent link">&para;</a></h3>
+<p>A <strong>periodic task</strong> is a software task that is activated at regular time intervals.</p>
+<p>For example, a motor-control task may be activated every 10 ms to calculate and update the commands sent to the motors.</p>
+<p>Its intended activation times could be:</p>
+<div class="arithmatex">\[
+0,\ 10,\ 20,\ 30,\ 40,\ 50,\ldots\ \text{ms}
+\]</div>
+<p>The time between consecutive intended activations is called the <strong>period</strong>.</p>
+<p>For this example:</p>
+<div class="arithmatex">\[
+T = 10\ \text{ms}
+\]</div>
+<p>The corresponding activation frequency is:</p>
+<div class="arithmatex">\[
+f = \frac{1}{T}
+\]</div>
+<p>Converting milliseconds to seconds:</p>
+<div class="arithmatex">\[
+T = 0.010\ \text{s}
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{f = \frac{1}{0.010} = 100\ \text{Hz}}
+\]</div>
+<p>This means that the motor-control task is intended to be <strong>activated 100 times per second</strong>.</p>
+<p>However, the actual execution of each task instance may begin later because the processor could be busy executing another task.</p>
+<h4 id="example-activation-versus-execution">Example: Activation versus execution<a class="headerlink" href="#example-activation-versus-execution" title="Permanent link">&para;</a></h4>
+<p>Consider a motor-control task with a period of 10 ms.</p>
+<table>
+<thead>
+<tr>
+<th>Task instance</th>
+<th style="text-align: right;">Activation time</th>
+<th style="text-align: right;">Actual execution start</th>
+<th style="text-align: right;">Completion time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">0 ms</td>
+<td style="text-align: right;">1 ms</td>
+<td style="text-align: right;">4 ms</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">10 ms</td>
+<td style="text-align: right;">11.2 ms</td>
+<td style="text-align: right;">14.6 ms</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">20 ms</td>
+<td style="text-align: right;">20.7 ms</td>
+<td style="text-align: right;">23.8 ms</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+  <img src="../images/task_activation_vs_execution.png"
+       alt="Task Activation and actual execution"
+       width="500">
+</p>
+
+<p>Notice that:</p>
+<ul>
+<li>The task is activated at regular 10 ms intervals.</li>
+<li>The actual execution starts at slightly different times.</li>
+<li>Each task instance takes some time to complete.</li>
+</ul>
+<p>The difference between the activation time and the actual execution start time is the <strong>scheduling delay</strong> in this simplified example.</p>
+<p>For instance, the second task instance is activated at 10 ms but starts executing at 11.2 ms.</p>
+<p>Its scheduling delay is:</p>
+<div class="arithmatex">\[
+T_{\text{delay}} = 11.2 - 10
+\]</div>
+<div class="arithmatex">\[
+\boxed{T_{\text{delay}} = 1.2\ \text{ms}}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A periodic task has regular intended activation times, but its actual execution start times may vary.</p>
+<p>The task must also satisfy any specified deadline, which may be shorter than its period.</p>
+</div>
+<p>Typical periodic operations in robotics include:</p>
+<ul>
+<li>Reading sensors at regular intervals.</li>
+<li>Updating motor-control commands.</li>
+<li>Estimating the robot's position.</li>
+<li>Monitoring battery voltage.</li>
+<li>Recording diagnostic information.</li>
+</ul>
+<h3 id="event-driven-operations">Event-driven operations<a class="headerlink" href="#event-driven-operations" title="Permanent link">&para;</a></h3>
+<p>An <strong>event-driven task</strong> is activated in response to a particular event rather than according to a fixed periodic schedule.</p>
+<p>The event may occur at an unpredictable time.</p>
+<p>Examples include:</p>
+<ul>
+<li>A communication message arrives.</li>
+<li>A limit switch changes state.</li>
+<li>A hardware interrupt is generated.</li>
+<li>A new sensor measurement becomes available.</li>
+<li>A user presses a stop button.</li>
+</ul>
+<p>For example, a robot may receive a wireless command at an unpredictable time.</p>
+<p>When the message arrives, the system can activate a command-processing task.</p>
+<p>However, just as with periodic tasks, activation does not necessarily mean immediate execution.</p>
+<p>The task may have to wait until the processor becomes available or the scheduler selects it to run.</p>
+<h4 id="example-wireless-command-processing">Example: Wireless command processing<a class="headerlink" href="#example-wireless-command-processing" title="Permanent link">&para;</a></h4>
+<p>Suppose a robot receives a wireless command at 125 ms.</p>
+<p>The following events occur:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th style="text-align: right;">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wireless message arrives</td>
+<td style="text-align: right;">125 ms</td>
+</tr>
+<tr>
+<td>Command-processing task is activated</td>
+<td style="text-align: right;">125 ms</td>
+</tr>
+<tr>
+<td>Task begins execution</td>
+<td style="text-align: right;">127 ms</td>
+</tr>
+<tr>
+<td>Task completes processing</td>
+<td style="text-align: right;">130 ms</td>
+</tr>
+</tbody>
+</table>
+<p>In this example:</p>
+<ul>
+<li>The task is activated when the message arrives.</li>
+<li>The task begins executing 2 ms later.</li>
+<li>The task completes processing 5 ms after the message arrives.</li>
+</ul>
+<p>If the requirement is to complete processing within 10 ms after receiving the message, this execution meets the deadline.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Event-driven does not automatically mean real-time.</p>
+<p>An event-driven task must still satisfy its timing requirements if the application requires a bounded response.</p>
+<p>Similarly, a periodic task is not necessarily hard real-time.</p>
+</div>
+<h3 id="comparison-periodic-versus-event-driven-tasks">Comparison: Periodic versus event-driven tasks<a class="headerlink" href="#comparison-periodic-versus-event-driven-tasks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Periodic task</th>
+<th>Event-driven task</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activation</td>
+<td>At regular time intervals</td>
+<td>In response to an event</td>
+</tr>
+<tr>
+<td>Example</td>
+<td>Motor-control update</td>
+<td>Incoming communication message</td>
+</tr>
+<tr>
+<td>Timing</td>
+<td>Defined activation period</td>
+<td>Depends on event arrival</td>
+</tr>
+<tr>
+<td>Actual execution</td>
+<td>May be delayed by scheduling</td>
+<td>May be delayed by scheduling</td>
+</tr>
+<tr>
+<td>Typical requirement</td>
+<td>Complete each instance before its deadline</td>
+<td>Respond within a specified time after the event</td>
+</tr>
+</tbody>
+</table>
+<p>Both approaches are widely used in robotics.</p>
+<p>A robotic system may contain periodic and event-driven tasks operating simultaneously.</p>
+<p>For example, a mobile robot might periodically update its motor-control commands while also responding to incoming wireless messages.</p>
+<div class="admonition note">
+<p class="admonition-title">Task activation versus scheduling</p>
+<p>Periodic and event-driven operations describe <strong>when software tasks become ready to execute</strong>.</p>
+<p>These concepts are related to, but different from, <strong>clock-driven and event-driven scheduling</strong>, which describe how scheduling decisions are triggered or organised (<a href="https://www.geeksforgeeks.org/operating-systems/difference-between-clock-driven-and-event-driven-scheduling/" rel="noopener noreferrer" target="_blank">Read More</a>).</p>
+<p>For example, a periodic motor-control task and an event-driven communication task can both be managed by the same operating-system scheduler.</p>
+<p>We will explore scheduling mechanisms in Module 2.</p>
+</div>
+<hr />
+<h2 id="125-how-robot-speed-affects-timing-requirements">1.2.5 How robot speed affects timing requirements<a class="headerlink" href="#125-how-robot-speed-affects-timing-requirements" title="Permanent link">&para;</a></h2>
+<p>Timing requirements are often related to how quickly a robot moves.</p>
+<p>Consider a mobile robot approaching an obstacle.</p>
+<p>If the robot travels at a constant speed <span class="arithmatex">\(v\)</span>, the distance it travels during a time interval <span class="arithmatex">\(t\)</span> is:</p>
+<div class="arithmatex">\[
+d = vt
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(d\)</span> = distance traveled (m)</li>
+<li><span class="arithmatex">\(v\)</span> = robot speed (m/s)</li>
+<li><span class="arithmatex">\(t\)</span> = elapsed time (s)</li>
+</ul>
+<h3 id="example-1-slow-moving-robot">Example 1: Slow-moving robot<a class="headerlink" href="#example-1-slow-moving-robot" title="Permanent link">&para;</a></h3>
+<p>Suppose a robot moves at:</p>
+<div class="arithmatex">\[
+v = 0.2\ \text{m/s}
+\]</div>
+<p>Its software takes 100 ms to respond to an obstacle.</p>
+<p>Convert the response time:</p>
+<div class="arithmatex">\[
+t = 100\ \text{ms} = 0.1\ \text{s}
+\]</div>
+<p>The robot travels:</p>
+<div class="arithmatex">\[
+d = 0.2 \times 0.1
+\]</div>
+<div class="arithmatex">\[
+\boxed{d = 0.02\ \text{m} = 2\ \text{cm}}
+\]</div>
+<p>The robot moves 2 cm during the response delay.</p>
+<h3 id="example-2-faster-moving-robot">Example 2: Faster-moving robot<a class="headerlink" href="#example-2-faster-moving-robot" title="Permanent link">&para;</a></h3>
+<p>Now suppose the robot moves at:</p>
+<div class="arithmatex">\[
+v = 1.0\ \text{m/s}
+\]</div>
+<p>With the same response delay:</p>
+<div class="arithmatex">\[
+d = 1.0 \times 0.1
+\]</div>
+<div class="arithmatex">\[
+\boxed{d = 0.1\ \text{m} = 10\ \text{cm}}
+\]</div>
+<p>The faster robot travels 10 cm during the same delay.</p>
+<h3 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Robot speed</th>
+<th style="text-align: right;">Response delay</th>
+<th style="text-align: right;">Distance traveled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.2 m/s</td>
+<td style="text-align: right;">100 ms</td>
+<td style="text-align: right;">2 cm</td>
+</tr>
+<tr>
+<td>0.5 m/s</td>
+<td style="text-align: right;">100 ms</td>
+<td style="text-align: right;">5 cm</td>
+</tr>
+<tr>
+<td>1.0 m/s</td>
+<td style="text-align: right;">100 ms</td>
+<td style="text-align: right;">10 cm</td>
+</tr>
+<tr>
+<td>2.0 m/s</td>
+<td style="text-align: right;">100 ms</td>
+<td style="text-align: right;">20 cm</td>
+</tr>
+</tbody>
+</table>
+<p>These calculations assume that the robot continues moving at a constant speed throughout the response delay.</p>
+<p>Importantly, the calculated distance represents only the distance traveled before the robot begins responding to the stop command.</p>
+<p>Even after the stop command is issued, the robot may continue moving while its motors slow down.</p>
+<p>Therefore, the total stopping distance can be expressed as:</p>
+<div class="arithmatex">\[
+\boxed{d_{\text{total}} = d_{\text{response}} + d_{\text{braking}}}
+\]</div>
+<p>where:</p>
+<p><span class="arithmatex">\(d_{\text{response}}\)</span> = distance traveled during the response delay, and</p>
+<p><span class="arithmatex">\(d_{\text{braking}}\)</span> = additional distance traveled while slowing down.</p>
+<p>For example, if a robot travels 10 cm during the response delay and another 15 cm while braking:</p>
+<div class="arithmatex">\[
+d_{\text{total}} = 10 + 15 = 25\ \text{cm}
+\]</div>
+<p>The robot therefore requires at least <strong>25 cm</strong> to stop under these assumed conditions.</p>
+<h3 id="what-can-we-conclude">What can we conclude?<a class="headerlink" href="#what-can-we-conclude" title="Permanent link">&para;</a></h3>
+<p>As robot speed increases, a fixed response delay results in a greater distance traveled.</p>
+<p>Therefore, faster-moving robots may require shorter response times, earlier obstacle detection, greater stopping distances, or a combination of these measures.</p>
+<p>Timing requirements should be derived from the physical behavior and safety needs of the system.</p>
+<hr />
+<h2 id="126-timing-requirements-and-task-priorities">1.2.6 Timing requirements and task priorities<a class="headerlink" href="#126-timing-requirements-and-task-priorities" title="Permanent link">&para;</a></h2>
+<p>A robot may execute several software tasks at the same time. For instance, motor control, sensor acquisition, obstacle detection, data logging, user-interface updates. These tasks compete for computing resources.</p>
+<p>If a noncritical task occupies the processor while an important control task is waiting, the control task may be delayed.</p>
+<p>Real-time systems therefore use scheduling mechanisms to determine which tasks execute and when.</p>
+<p>Some tasks may be assigned higher scheduling priorities because their timing requirements are more demanding.</p>
+<p>For example, a motor-control task may need to execute before a less time-critical data-logging task.</p>
+<p>However, assigning a higher priority does not automatically guarantee that a task will meet its deadline. Execution times, resource sharing, scheduling delays, and other factors must also be considered.</p>
+<p>We will explore task scheduling and priorities in detail in Module 2.</p>
+<hr />
+<h2 id="127-from-application-requirements-to-software-requirements">1.2.7 From application requirements to software requirements<a class="headerlink" href="#127-from-application-requirements-to-software-requirements" title="Permanent link">&para;</a></h2>
+<p>A useful engineering approach is to begin with what the robot must accomplish and then identify the corresponding software timing requirements.</p>
+<p>Consider the following simplified example.</p>
+<p><strong>Application requirement:</strong></p>
+<p>A mobile robot must detect nearby obstacles and respond before travelling an excessive distance.</p>
+<p><strong>Possible derived software requirements:</strong></p>
+<ol>
+<li>The distance sensor shall provide a new measurement at least every 50 ms.</li>
+<li>The obstacle-processing task shall complete within 10 ms after receiving a valid measurement.</li>
+<li>The motor-command task shall deliver a STOP command within 10 ms after an obstacle condition is identified.</li>
+</ol>
+<p>These requirements describe specific operations that can be implemented and tested.</p>
+<div class="admonition important">
+<p class="admonition-title">Engineering principle</p>
+<p>Good real-time requirements should be <strong>specific, measurable, and testable</strong>.</p>
+<p>For example:</p>
+<p><strong>Vague requirement:</strong> "The robot should respond quickly."</p>
+<p><strong>Measurable requirement:</strong> "The controller shall produce a STOP command within 20 ms after receiving a valid obstacle-detection event."</p>
+</div>
+<p>The second statement provides a clear criterion for testing the software.</p>
+<h3 id="understanding-the-complete-response-time">Understanding the complete response time<a class="headerlink" href="#understanding-the-complete-response-time" title="Permanent link">&para;</a></h3>
+<p>The three requirements describe different stages of the robot's response.</p>
+<p>Suppose an obstacle appears immediately after the sensor has taken a measurement.</p>
+<p>If the sensor provides a new measurement every 50 ms, the robot may have to wait almost 50 ms before the obstacle is detected.</p>
+<p>After receiving the new measurement:</p>
+<ol>
+<li>The obstacle-processing task may take up to 10 ms.</li>
+<li>The motor-command task may take another 10 ms.</li>
+</ol>
+<p>Under these simplified assumptions, the total time could approach:</p>
+<div class="arithmatex">\[
+T_{\text{response}} = 50 + 10 + 10
+\]</div>
+<div class="arithmatex">\[
+\boxed{T_{\text{response}} = 70\ \text{ms}}
+\]</div>
+<p>This example assumes that the specified delays cover the relevant stages and that no additional delays occur. A real system may also introduce sensor acquisition, communication, scheduling, and actuator delays.</p>
+<div class="admonition important">
+<p class="admonition-title">Key distinction</p>
+<p><strong>Software response time</strong> may be measured from the moment a valid sensor measurement is received.</p>
+<p><strong>End-to-end response time</strong> considers the time from the occurrence of a physical event until the required system response is produced.</p>
+<p>These are different timing requirements and must not be confused.</p>
+</div>
+<h3 id="how-can-we-verify-timing-requirements">How can we verify timing requirements?<a class="headerlink" href="#how-can-we-verify-timing-requirements" title="Permanent link">&para;</a></h3>
+<p>Timing requirements should be measurable so that engineers can determine whether the system satisfies them.</p>
+<p>One approach is to record timestamps at important stages of execution.</p>
+<p>For example:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th style="text-align: right;">Timestamp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Valid obstacle measurement received</td>
+<td style="text-align: right;">100 ms</td>
+</tr>
+<tr>
+<td>Obstacle-processing task completed</td>
+<td style="text-align: right;">107 ms</td>
+</tr>
+<tr>
+<td>STOP command delivered</td>
+<td style="text-align: right;">115 ms</td>
+</tr>
+</tbody>
+</table>
+<p>The processing time is:</p>
+<div class="arithmatex">\[
+T_{\text{processing}} = 107 - 100 = 7\ \text{ms}
+\]</div>
+<p>The motor-command delivery time after obstacle identification is:</p>
+<div class="arithmatex">\[
+T_{\text{command}} = 115 - 107 = 8\ \text{ms}
+\]</div>
+<p>Both operations satisfy their respective 10 ms deadlines in this execution.</p>
+<p>The total software response time is:</p>
+<div class="arithmatex">\[
+T_{\text{software}} = 115 - 100 = 15\ \text{ms}
+\]</div>
+<p>This example demonstrates how timestamps can be used to evaluate timing requirements.</p>
+<p>However, observing one successful execution does not prove that every future execution will meet its deadline. Engineers must consider timing variations and the system's operating conditions.</p>
+<p>Later in this course, you will use C++ to measure execution times and investigate how scheduling affects task timing.</p>
+<hr />
+<div class="chapter-nav">
+  <a href="../01-introduction/">
+    ← Previous: 1.1 Introduction
+  </a>
+
+  <span class="separator">|</span>
+
+  <a href="../03-real-time-types/">
+    Next: 1.3 Real-time Types →
+  </a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/password.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

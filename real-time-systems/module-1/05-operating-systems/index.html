@@ -1,0 +1,3324 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning resources for robotics engineering">
+      
+      
+      
+        <link rel="canonical" href="https://metropolia-robotics.github.io/metropolia-robotics/real-time-systems/module-1/05-operating-systems/">
+      
+      
+        <link rel="prev" href="../04-timing-concepts/">
+      
+      
+        <link rel="next" href="../lab-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>1.5 Operating Systems - Robotics Learning Hub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#15-general-purpose-operating-systems-versus-real-time-operating-systems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Robotics Learning Hub" class="md-header__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robotics Learning Hub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.5 Operating Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Robotics Learning Hub" class="md-nav__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robotics Learning Hub
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Courses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-time Systems in Robotics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Real-time Systems in Robotics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - Foundations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-real-time-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3 Real-time Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-timing-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.4 Timing Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.5 Operating Systems
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.5 Operating Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151-why-do-robots-need-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.1 Why do robots need operating systems?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.1 Why do robots need operating systems?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lets-take-an-example-of-mobile-robot-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's take an example of Mobile robot controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-general-purpose-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.2 General-purpose operating systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.2 General-purpose operating systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-windows-laptop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Windows laptop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-real-time-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.3 Real-time operating systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.3 Real-time operating systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-robot-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded robot controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-what-is-task-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.4 What is task scheduling?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.4 What is task scheduling?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-151-simplified-task-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.1: Simplified task scheduler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-scheduling-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is scheduling important?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155-pre-emptive-versus-non-pre-emptive-cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.5 Pre-emptive versus non-pre-emptive (cooperative) scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.5 Pre-emptive versus non-pre-emptive (cooperative) scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-emptive scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-emptive-scheduling-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-emptive scheduling example:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-pre-emptive scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cooperative scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-pre-emptive-scheduling-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-pre-emptive scheduling example:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figure-151-non-pre-emptive-scheduling-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.1: Non-pre-emptive scheduling timeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-pre-emptive-versus-non-pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Pre-emptive versus non-pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-the-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing the examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156-task-states-in-an-rtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.6 Task states in an RTOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.6 Task states in an RTOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-152-simplified-task-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.2: Simplified task-state transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#157-polling-versus-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.7 Polling versus interrupts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.7 Polling versus interrupts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Polling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figure-153-interrupt-driven-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.3: Interrupt-driven processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#158-why-can-timing-become-unpredictable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.8 Why can timing become unpredictable?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.8 Why can timing become unpredictable?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-higher-priority-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Higher-priority tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-interrupt-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Interrupt handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-shared-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Shared resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-memory-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Memory management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-hardware-and-system-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Hardware and system behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#159-comparing-windows-linux-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.9 Comparing Windows, Linux, &amp; FreeRTOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.9 Comparing Windows, Linux, &amp; FreeRTOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-with-preempt_rt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux with PREEMPT_RT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1510-example-a-robot-with-two-computing-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.10 Example: A robot with two computing systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.10 Example: A robot with two computing systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-154-computing-architecture-may-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.4: Computing architecture may look like
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1511-choosing-an-operating-system-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.11 Choosing an operating-system approach
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/01-sequential-concurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1 Sequential and Concurrent Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/02-multithreading.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2 Multithreading in C++
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/03-periodic-scheduling.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3 Periodic Tasks and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/04-shared-data.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4 Shared Data and Race Conditions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/05-synchronisation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.5 Synchronisation Mechanisms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/lab-2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2: Concurrent Robot Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-2/lab-3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3: Safe Sensor-data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ros-sw-arch/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Operating Systems and Software Architectures
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Operating Systems and Software Architectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2_2" id="__nav_2_1_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ros-sw-arch/module-1/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Software Project
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Software Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/module-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151-why-do-robots-need-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.1 Why do robots need operating systems?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.1 Why do robots need operating systems?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lets-take-an-example-of-mobile-robot-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's take an example of Mobile robot controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-general-purpose-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.2 General-purpose operating systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.2 General-purpose operating systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-windows-laptop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Windows laptop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-real-time-operating-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.3 Real-time operating systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.3 Real-time operating systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-robot-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded robot controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-what-is-task-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.4 What is task scheduling?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.4 What is task scheduling?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-151-simplified-task-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.1: Simplified task scheduler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-scheduling-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is scheduling important?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155-pre-emptive-versus-non-pre-emptive-cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.5 Pre-emptive versus non-pre-emptive (cooperative) scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.5 Pre-emptive versus non-pre-emptive (cooperative) scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-emptive scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-emptive-scheduling-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-emptive scheduling example:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-pre-emptive scheduling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cooperative scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-pre-emptive-scheduling-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-pre-emptive scheduling example:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figure-151-non-pre-emptive-scheduling-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.1: Non-pre-emptive scheduling timeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-pre-emptive-versus-non-pre-emptive-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Pre-emptive versus non-pre-emptive scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-the-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing the examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156-task-states-in-an-rtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.6 Task states in an RTOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.6 Task states in an RTOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-152-simplified-task-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.2: Simplified task-state transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#157-polling-versus-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.7 Polling versus interrupts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.7 Polling versus interrupts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Polling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figure-153-interrupt-driven-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.3: Interrupt-driven processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#158-why-can-timing-become-unpredictable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.8 Why can timing become unpredictable?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.8 Why can timing become unpredictable?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-higher-priority-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Higher-priority tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-interrupt-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Interrupt handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-shared-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Shared resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-memory-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Memory management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-hardware-and-system-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Hardware and system behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#159-comparing-windows-linux-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.9 Comparing Windows, Linux, &amp; FreeRTOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.9 Comparing Windows, Linux, &amp; FreeRTOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-with-preempt_rt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux with PREEMPT_RT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1510-example-a-robot-with-two-computing-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.10 Example: A robot with two computing systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5.10 Example: A robot with two computing systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#figure-154-computing-architecture-may-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figure 1.5.4: Computing architecture may look like
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1511-choosing-an-operating-system-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.11 Choosing an operating-system approach
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="15-general-purpose-operating-systems-versus-real-time-operating-systems">1.5 General-purpose Operating Systems versus Real-time Operating Systems<a class="headerlink" href="#15-general-purpose-operating-systems-versus-real-time-operating-systems" title="Permanent link">&para;</a></h1>
+<h2 id="151-why-do-robots-need-operating-systems">1.5.1 Why do robots need operating systems?<a class="headerlink" href="#151-why-do-robots-need-operating-systems" title="Permanent link">&para;</a></h2>
+<p>In the previous chapters, we learned that robotic software must often perform several operations within specified timing constraints.</p>
+<p>Consider an autonomous mobile robot, it may need to read distance sensors, calculate motor commands, monitor battery voltage, communicate with another computer, or record diagnostic information.</p>
+<p>These operations may need to happen repeatedly, and some may need to happen concurrently.</p>
+<ul>
+<li>
+<p>But who decides which operation runs first?</p>
+</li>
+<li>
+<p>Who determines when a waiting task can execute?</p>
+</li>
+<li>
+<p>Who manages access to the processor and other hardware resources?</p>
+</li>
+</ul>
+<p>These responsibilities are commonly handled by an <strong>operating system (OS)</strong>.</p>
+<p>An operating system is software that manages computing resources and provides services to applications. Typical responsibilities include: Scheduling software tasks, Managing memory, Handling hardware interrupts, Providing communication mechanisms, Managing input and output, Coordinating access to shared resources.</p>
+<h3 id="lets-take-an-example-of-mobile-robot-controller">Let's take an example of Mobile robot controller<a class="headerlink" href="#lets-take-an-example-of-mobile-robot-controller" title="Permanent link">&para;</a></h3>
+<p>A robot controller may contain three tasks:</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Function</th>
+<th style="text-align: right;">Example period</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensor task</td>
+<td>Read distance measurements</td>
+<td style="text-align: right;">50 ms</td>
+</tr>
+<tr>
+<td>Control task</td>
+<td>Calculate motor commands</td>
+<td style="text-align: right;">20 ms</td>
+</tr>
+<tr>
+<td>Logging task</td>
+<td>Record system information</td>
+<td style="text-align: right;">500 ms</td>
+</tr>
+</tbody>
+</table>
+<p>All three tasks may need processor time.</p>
+<p>On a single-core processor, only one task can execute on that core at a particular instant.</p>
+<p>The operating system's <strong>scheduler</strong> helps decide which ready task executes (<a href="https://www.geeksforgeeks.org/operating-systems/process-schedulers-in-operating-system/" rel="noopener noreferrer" target="_blank">Read more: Process Scheduling in OS - Geekforgeeks</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not every robot requires an operating system.</p>
+<p>A simple microcontroller can execute a single program directly without a conventional OS. This is commonly called <strong>bare-metal programming</strong>.</p>
+<p>An RTOS becomes useful when the application needs structured task scheduling, concurrency, and other operating-system services.</p>
+</div>
+<hr />
+<h2 id="152-general-purpose-operating-systems">1.5.2 General-purpose operating systems<a class="headerlink" href="#152-general-purpose-operating-systems" title="Permanent link">&para;</a></h2>
+<p>A <strong>general-purpose operating system (GPOS)</strong> is designed to support a wide variety of applications and workloads. E.g., Microsoft Windows, Standard desktop Linux distributions, macOS.</p>
+<p>These systems are designed to provide capabilities such as:</p>
+<ul>
+<li>running multiple applications,</li>
+<li>supporting graphical user interfaces,</li>
+<li>managing files and storage,</li>
+<li>providing networking services,</li>
+<li>sharing computing resources,</li>
+<li>maintaining good overall performance and responsiveness.</li>
+</ul>
+<h3 id="example-windows-laptop">Example: Windows laptop<a class="headerlink" href="#example-windows-laptop" title="Permanent link">&para;</a></h3>
+<p>Imagine running the following applications simultaneously: VS Code, a web browser, a music player,a C++ robotics simulator. The operating system manages these applications and shares the available computing resources between them. This works well for ordinary computing.</p>
+<p>However, suppose your robotics simulation contains a control task that should execute every 10 ms. Other system activities may affect when the task actually executes. For instance, background applications may consume processor time, device drivers may perform some tasks, the OS may schedule another task, memory management may introduce delays.</p>
+<p>As a result, the task may occasionally start later than intended.</p>
+<div class="admonition important">
+<p class="admonition-title">Key concept</p>
+<p>A GPOS usually aims to provide good overall performance &amp; responsiveness.</p>
+<p>It doesn't automatically guarantee that an ordinary application will meet every real-time deadline.</p>
+</div>
+<p>This does not mean that Windows or standard Linux cannot execute time-sensitive programs. They can, and they are useful for learning, simulation, development, and many robotics applications.</p>
+<p>The important distinction is between <strong>observed timing performance</strong> and a <strong>guaranteed timing bound</strong>.</p>
+<hr />
+<h2 id="153-real-time-operating-systems">1.5.3 Real-time operating systems<a class="headerlink" href="#153-real-time-operating-systems" title="Permanent link">&para;</a></h2>
+<p>A <strong>real-time operating system (RTOS)</strong> is designed to support applications with explicit timing requirements.</p>
+<p>An RTOS typically provides mechanisms for:</p>
+<ul>
+<li>Task scheduling,</li>
+<li>Task priorities,</li>
+<li>Pre-emption,</li>
+<li>Timers and periodic execution,</li>
+<li>Interrupt handling,</li>
+<li>Task synchronisation,</li>
+<li>Inter-task communication</li>
+</ul>
+<p>The objective is to make timing behaviour sufficiently predictable for the application's requirements.</p>
+<h3 id="example-embedded-robot-controller">Example: Embedded robot controller<a class="headerlink" href="#example-embedded-robot-controller" title="Permanent link">&para;</a></h3>
+<p>Let's consider a microcontroller controlling a mobile robot. The controller executes a high-priority motor-control task, a medium-priority sensor task, &amp; a lower-priority logging task.</p>
+<p>Now let's suppose the logging task is currently running when the motor-control task becomes ready. With a suitable <strong>pre-emptive scheduling</strong> configuration, the RTOS can interrupt the logging task and allow the higher-priority motor-control task to execute.</p>
+<p>This reduces the time the control task spends waiting for lower-priority work.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An RTOS does not automatically guarantee that every deadline will be met.</p>
+<p>Meeting deadlines also depends on execution times, priorities, resource sharing, interrupt behaviour, hardware, and the overall system design.</p>
+</div>
+<p>A widely used example is <strong>FreeRTOS</strong>, a real-time operating-system kernel commonly used in embedded systems.</p>
+<p>Its default single-core scheduling policy uses fixed priorities and pre-emption (<a href="https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/01-Tasks-and-co-routines/04-Task-scheduling" rel="noopener noreferrer" target="_blank">Read more: FreeRTOS Scheduling - FreeRTOS Documentation</a>).</p>
+<hr />
+<h2 id="154-what-is-task-scheduling">1.5.4 What is task scheduling?<a class="headerlink" href="#154-what-is-task-scheduling" title="Permanent link">&para;</a></h2>
+<p><strong>Task scheduling</strong> is the process of deciding which task should execute on the processor.</p>
+<p>Consider a single-core processor with three ready tasks:</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Function</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Motor control</td>
+<td>High</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Sensor processing</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Data logging</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p>If all three tasks are ready and the scheduler uses fixed-priority pre-emptive scheduling, Task A is selected first.</p>
+<p>When Task A finishes or blocks, the scheduler can select Task B.</p>
+<p>Task C runs when no higher-priority task is ready.</p>
+<h3 id="figure-151-simplified-task-scheduler">Figure 1.5.1: Simplified task scheduler<a class="headerlink" href="#figure-151-simplified-task-scheduler" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    A["Tasks become ready"] --&gt; B["Operating-system scheduler"]
+    B --&gt; C{"Which ready task has the highest priority?"}
+    C --&gt; D["Select task"]
+    D --&gt; E["Execute on CPU"]
+    E --&gt; F{"Task completes, blocks or is pre-empted?"}
+    F --&gt; G["Update task states"]
+    G --&gt; B</code></pre>
+<p>This is a simplified representation of priority-based scheduling.</p>
+<p>Actual operating systems may use different scheduling policies and additional rules.</p>
+<h3 id="why-is-scheduling-important">Why is scheduling important?<a class="headerlink" href="#why-is-scheduling-important" title="Permanent link">&para;</a></h3>
+<p>Suppose the motor-control task must complete within 10 ms.</p>
+<p>If it waits too long before executing, it may miss its deadline even if its calculations require only 2 ms of processor time.</p>
+<p>From previous chapter, we know that</p>
+<div class="arithmatex">\[
+R = t_{\text{completion}} - r
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(R\)</span> = task response time.</li>
+<li><span class="arithmatex">\(r\)</span> = release time.</li>
+<li><span class="arithmatex">\(t_{\text{completion}}\)</span> = completion time.</li>
+</ul>
+<p>Scheduling delays contribute to the response time.</p>
+<p>Therefore, scheduling behaviour is an important part of real-time system design.</p>
+<hr />
+<h2 id="155-pre-emptive-versus-non-pre-emptive-cooperative-scheduling">1.5.5 Pre-emptive versus non-pre-emptive (cooperative) scheduling<a class="headerlink" href="#155-pre-emptive-versus-non-pre-emptive-cooperative-scheduling" title="Permanent link">&para;</a></h2>
+<p>Operating systems use different scheduling approaches to determine when tasks can execute and whether a running task can be interrupted.</p>
+<p>Two important approaches are:</p>
+<ol>
+<li><strong>Pre-emptive scheduling</strong></li>
+<li><strong>Non-pre-emptive scheduling</strong>, which includes cooperative scheduling</li>
+</ol>
+<p>The fundamental difference is whether the scheduler can forcibly take the processor away from a running task to execute another task.</p>
+<h3 id="pre-emptive-scheduling">Pre-emptive scheduling<a class="headerlink" href="#pre-emptive-scheduling" title="Permanent link">&para;</a></h3>
+<p>In <strong>pre-emptive scheduling</strong>, the operating system can interrupt a running task and allow another task to execute, according to its scheduling policy. For example, in a fixed-priority pre-emptive system, a high-priority motor-control task may become ready while a lower-priority logging task is running. The scheduler can <strong>pre-empt</strong> (temporarily suspend) the logging task and allow the higher-priority motor-control task to execute. Once the motor-control task finishes or blocks, the logging task may resume.</p>
+<p>This approach is particularly useful in robotics because time-critical tasks can receive processor time without waiting for lower-priority tasks to finish.</p>
+<h4 id="pre-emptive-scheduling-example">Pre-emptive scheduling example:<a class="headerlink" href="#pre-emptive-scheduling-example" title="Permanent link">&para;</a></h4>
+<p>Let's consider a robot with two tasks:</p>
+<ul>
+<li><strong>Task L:</strong> Low-priority data logging.</li>
+<li><strong>Task H:</strong> High-priority motor control.</li>
+</ul>
+<p>Now let's assume the following:</p>
+<ul>
+<li>Task L starts executing at 0 ms and requires 10 ms of CPU time.</li>
+<li>Task H becomes ready (is released) at 3 ms.</li>
+<li>Task H requires 2 ms of uninterrupted execution.</li>
+<li>The processor has a single core.</li>
+<li>Scheduling and context-switching overheads are ignored.</li>
+</ul>
+<p>The execution sequence is:</p>
+<p><img alt="Pre-emptive scheduling timeline" src="../images/pre-emptive.svg" /></p>
+<!--
+<div class="highlight"><pre><span></span><code>Time (ms)   0         3     5                12
+            |---------|=====|-----------------|
+Task L      [Running] [Paused] [Running again]
+Task H                [Running]
+                       3–5 ms
+</code></pre></div>
+-->
+
+<p>The response time of Task H is calculated as:</p>
+<div class="arithmatex">\[
+R_H = t_{\text{completion}} - r
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(R_H\)</span> = response time of Task H</li>
+<li><span class="arithmatex">\(r\)</span> = release time</li>
+<li><span class="arithmatex">\(t_{\text{completion}}\)</span> = completion time</li>
+</ul>
+<p>Substituting the values:</p>
+<div class="arithmatex">\[
+R_H = 5 - 3
+\]</div>
+<div class="arithmatex">\[
+\boxed{R_H = 2\ \text{ms}}
+\]</div>
+<p>Task H responds quickly because it does not have to wait for the lower-priority task to finish.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pre-emption does not mean that a higher-priority task will always execute instantaneously.</p>
+<p>In a real system, context-switching overhead, interrupt handling, and other factors may introduce additional delays.</p>
+</div>
+<hr />
+<h3 id="non-pre-emptive-scheduling">Non-pre-emptive scheduling<a class="headerlink" href="#non-pre-emptive-scheduling" title="Permanent link">&para;</a></h3>
+<p>In <strong>non-pre-emptive scheduling</strong>, the scheduler does not forcibly interrupt a running task simply because another task becomes ready.</p>
+<p>Once a task begins executing, it retains the processor until it:</p>
+<ul>
+<li>completes its execution,</li>
+<li>blocks while waiting for an event or resource,</li>
+<li>or voluntarily yields control, if supported by the scheduling system.</li>
+</ul>
+<p>Consequently, even a high-priority task may have to wait while a lower-priority task is executing.</p>
+<h4 id="cooperative-scheduling">Cooperative scheduling<a class="headerlink" href="#cooperative-scheduling" title="Permanent link">&para;</a></h4>
+<p><strong>Cooperative scheduling is a form of non-pre-emptive scheduling.</strong></p>
+<p>In cooperative scheduling, tasks voluntarily cooperate by yielding control or blocking so that other ready tasks can execute.</p>
+<p>For example, a task may call an operating-system function to yield the processor after completing part of its work.</p>
+<p>Unlike pre-emptive scheduling, the operating system does not forcibly interrupt the task merely because a higher-priority task becomes ready.</p>
+<div class="admonition important">
+<p class="admonition-title">Key distinction</p>
+<p><strong>Non-pre-emptive scheduling</strong> is the broader category in which a running task is not forcibly displaced by the scheduler.</p>
+<p><strong>Cooperative scheduling</strong> is a form of non-pre-emptive scheduling that relies on tasks voluntarily yielding or blocking to allow other tasks to run.</p>
+<p>The terms are sometimes used interchangeably, but they are not always identical.</p>
+</div>
+<h4 id="non-pre-emptive-scheduling-example">Non-pre-emptive scheduling example:<a class="headerlink" href="#non-pre-emptive-scheduling-example" title="Permanent link">&para;</a></h4>
+<p>Consider the same two tasks:</p>
+<ul>
+<li><strong>Task L:</strong> Low-priority data logging.</li>
+<li><strong>Task H:</strong> High-priority motor control.</li>
+</ul>
+<p>Let's assume the following:</p>
+<ul>
+<li>Task L starts executing at 0 ms.</li>
+<li>Task L requires 10 ms of uninterrupted execution.</li>
+<li>Task H becomes ready at 3 ms.</li>
+<li>Task H requires 2 ms of execution.</li>
+<li>Task L does not yield or block before completing.</li>
+<li>Scheduling overhead is ignored.</li>
+</ul>
+<p>The execution sequence is:</p>
+<p><img alt="Non-pre-emptive scheduling timeline" src="../images/non-pre-emptive.svg" /></p>
+<h3 id="figure-151-non-pre-emptive-scheduling-timeline">Figure 1.5.1: Non-pre-emptive scheduling timeline<a class="headerlink" href="#figure-151-non-pre-emptive-scheduling-timeline" title="Permanent link">&para;</a></h3>
+<!--
+<div class="highlight"><pre><span></span><code>Time (ms)   0         3                  10    12
+            |---------|-------------------|=====|
+Task L      [Running continuously 0–10 ms]
+Task H                [Waiting...........][Run]
+                                          10–12
+</code></pre></div>
+-->
+
+<p><strong>Step-by-step explanation:</strong></p>
+<ol>
+<li>At 0 ms, Task L begins executing.</li>
+<li>At 3 ms, Task H becomes ready.</li>
+<li>Task H cannot pre-empt Task L.</li>
+<li>Task L continues executing until 10 ms.</li>
+<li>At 10 ms, Task L finishes and releases the processor.</li>
+<li>Task H begins executing at 10 ms and completes at 12 ms.</li>
+</ol>
+<p>The response time of Task H is:</p>
+<div class="arithmatex">\[
+R_H = t_{\text{completion}} - r
+\]</div>
+<div class="arithmatex">\[
+R_H = 12 - 3
+\]</div>
+<div class="arithmatex">\[
+\boxed{R_H = 9\ \text{ms}}
+\]</div>
+<p>Although Task H requires only 2 ms of CPU execution time, its response time is 9 ms because it must wait for Task L.</p>
+<p>The waiting time is:</p>
+<div class="arithmatex">\[
+W_H = 10 - 3
+\]</div>
+<div class="arithmatex">\[
+\boxed{W_H = 7\ \text{ms}}
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+R_H = W_H + C_H
+\]</div>
+<div class="arithmatex">\[
+R_H = 7 + 2 = 9\ \text{ms}
+\]</div>
+<p>This relationship holds for this example because Task H executes continuously after it starts.</p>
+<div class="admonition tip">
+<p class="admonition-title">What if Task L yields earlier?</p>
+<p>Suppose Task L voluntarily yields at 4 ms instead of continuing until 10 ms.</p>
+<p>If the scheduler selects Task H immediately, Task H can execute from 4 ms to 6 ms.</p>
+<p>Its response time becomes:</p>
+<div class="arithmatex">\[
+R_H = 6 - 3 = 3\ \text{ms}
+\]</div>
+<p>This demonstrates how cooperative scheduling can improve responsiveness when tasks yield frequently enough.</p>
+</div>
+<hr />
+<h3 id="comparison-pre-emptive-versus-non-pre-emptive-scheduling">Comparison: Pre-emptive versus non-pre-emptive scheduling<a class="headerlink" href="#comparison-pre-emptive-versus-non-pre-emptive-scheduling" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Pre-emptive scheduling</th>
+<th>Non-pre-emptive scheduling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Can a running task be forcibly interrupted by the scheduler?</td>
+<td>Yes, according to scheduling rules</td>
+<td>No, not merely to schedule another ready task</td>
+</tr>
+<tr>
+<td>Can a higher-priority task immediately replace a lower-priority task?</td>
+<td>Usually, if pre-emption is permitted</td>
+<td>No; it must wait for the running task to relinquish the processor</td>
+</tr>
+<tr>
+<td>Response to time-critical tasks</td>
+<td>Often faster</td>
+<td>Depends on how long other tasks continue executing</td>
+</tr>
+<tr>
+<td>Programming complexity</td>
+<td>Requires careful handling of concurrent access to shared data</td>
+<td>Can simplify some concurrency concerns</td>
+</tr>
+<tr>
+<td>Risk of long waiting times</td>
+<td>Still possible because of blocking and other delays</td>
+<td>Higher when tasks execute for long periods without yielding</td>
+</tr>
+<tr>
+<td>Typical use</td>
+<td>Many RTOS configurations and GPOS</td>
+<td>Cooperative task loops and some embedded scheduling configurations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comparing-the-examples">Comparing the examples<a class="headerlink" href="#comparing-the-examples" title="Permanent link">&para;</a></h3>
+<p>Both examples use the same tasks and execution requirements.</p>
+<table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th style="text-align: right;">Pre-emptive</th>
+<th style="text-align: right;">Non-pre-emptive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task H release time</td>
+<td style="text-align: right;">3 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>Task H start time</td>
+<td style="text-align: right;">3 ms</td>
+<td style="text-align: right;">10 ms</td>
+</tr>
+<tr>
+<td>Task H execution time</td>
+<td style="text-align: right;">2 ms</td>
+<td style="text-align: right;">2 ms</td>
+</tr>
+<tr>
+<td>Task H completion time</td>
+<td style="text-align: right;">5 ms</td>
+<td style="text-align: right;">12 ms</td>
+</tr>
+<tr>
+<td>Task H waiting time</td>
+<td style="text-align: right;">0 ms</td>
+<td style="text-align: right;">7 ms</td>
+</tr>
+<tr>
+<td><strong>Task H response time</strong></td>
+<td style="text-align: right;"><strong>2 ms</strong></td>
+<td style="text-align: right;"><strong>9 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The high-priority motor-control task completes 7 ms earlier in the pre-emptive example.</p>
+<p>Suppose Task H has a relative deadline of:</p>
+<div class="arithmatex">\[
+D_H = 5\ \text{ms}
+\]</div>
+<p>For pre-emptive scheduling:</p>
+<div class="arithmatex">\[
+R_H = 2\ \text{ms} \leq 5\ \text{ms}
+\]</div>
+<p>The task <strong>meets its deadline</strong>.</p>
+<p>For non-pre-emptive scheduling:</p>
+<div class="arithmatex">\[
+R_H = 9\ \text{ms} &gt; 5\ \text{ms}
+\]</div>
+<p>The task <strong>misses its deadline by 4 ms</strong>.</p>
+<p>This illustrates why the choice of scheduling approach can significantly affect the timing behaviour of robotic systems.</p>
+<div class="admonition note">
+<p class="admonition-title">Important considerations</p>
+<p>Pre-emptive scheduling improves flexibility and can reduce the response time of high-priority tasks.</p>
+<p>However, it also introduces additional challenges when tasks share data or resources.</p>
+<p>Non-pre-emptive scheduling can simplify certain aspects of programming, but long-running tasks may delay time-critical operations.</p>
+<p>Neither approach automatically guarantees that all deadlines will be met.</p>
+<p>**task concurrency and scheduling will be studied in more detail in the next Module.</p>
+</div>
+<hr />
+<h2 id="156-task-states-in-an-rtos">1.5.6 Task states in an RTOS<a class="headerlink" href="#156-task-states-in-an-rtos" title="Permanent link">&para;</a></h2>
+<p>An RTOS typically manages tasks using several states.</p>
+<p>Three important states are:</p>
+<p><strong>Running</strong>: The task is currently executing on a processor.</p>
+<p><strong>Ready</strong>: The task can execute but is waiting to be selected by the scheduler.</p>
+<p><strong>Blocked</strong>: The task is waiting for an event, such as a timer, message, or synchronisation condition.</p>
+<p>A task may also be suspended, depending on the OS.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Ready"] --&gt;|"Selected by scheduler"| B["Running"]
+    B --&gt;|"Pre-empted or yields"| A
+    B --&gt;|"Waits for timer or event"| C["Blocked"]
+    C --&gt;|"Timer expires or event occurs"| A</code></pre>
+<h3 id="figure-152-simplified-task-state-transitions">Figure 1.5.2: Simplified task-state transitions<a class="headerlink" href="#figure-152-simplified-task-state-transitions" title="Permanent link">&para;</a></h3>
+<p>For example, suppose a sensor task is intended to execute every 50 ms (periodically).</p>
+<ol>
+<li>The task waits for its next scheduled release.</li>
+<li>When the timer condition is satisfied, it becomes ready.</li>
+<li>The scheduler selects the task.</li>
+<li>The task reads the sensor.</li>
+<li>The task waits for its next release.</li>
+</ol>
+<p>The cycle repeats.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A blocked task does not continuously consume CPU time while waiting.</p>
+<p>This allows the processor to execute other ready tasks or enter an idle state.</p>
+</div>
+<hr />
+<h2 id="157-polling-versus-interrupts">1.5.7 Polling versus interrupts<a class="headerlink" href="#157-polling-versus-interrupts" title="Permanent link">&para;</a></h2>
+<p>Robotic controllers need to respond to hardware events.</p>
+<p>Two common approaches are <strong>polling</strong> and <strong>interrupts</strong> (<a href="https://www.geeksforgeeks.org/operating-systems/difference-between-interrupt-and-polling/" rel="noopener noreferrer" target="_blank">Read more: Pooling vs Interrupts</a>).</p>
+<h3 id="polling">Polling<a class="headerlink" href="#polling" title="Permanent link">&para;</a></h3>
+<p>In polling, software repeatedly checks whether an event has occurred.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>REPEAT:
+    Check whether a button is pressed
+
+    IF button is pressed:
+        Process button event
+</code></pre></div>
+<p>This approach is straightforward. However, if the programme checks continuously, it may consume processor time unnecessarily. If it checks only occasionally, an event may not be detected immediately.</p>
+<h3 id="interrupts">Interrupts<a class="headerlink" href="#interrupts" title="Permanent link">&para;</a></h3>
+<p>An <strong>interrupt</strong> is a mechanism that allows hardware or software to request the processor's attention.</p>
+<p>For example, a microcontroller may receive an interrupt when:</p>
+<ul>
+<li>A timer reaches a specified value.</li>
+<li>A digital input changes state.</li>
+<li>A communication peripheral receives data.</li>
+<li>A sensor indicates that a measurement is ready.</li>
+</ul>
+<p>The processor may temporarily interrupt normal execution to handle the event.</p>
+<p>A short function called an <strong>interrupt service routine (ISR)</strong> handles the immediate interrupt-related work.</p>
+<p>E.g., a robot uses a wheel encoder that generates pulses as the wheel rotates.</p>
+<p><strong>Polling approach:</strong></p>
+<p>The programme repeatedly reads the encoder input to check whether a pulse has occurred.</p>
+<p><strong>Interrupt approach:</strong></p>
+<p>An appropriate hardware event can trigger an interrupt when an encoder signal changes.</p>
+<p>The interrupt handler can record the event or notify a processing task.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Hardware event"] --&gt; B["Interrupt request"]
+    B --&gt; C["Interrupt service routine"]
+    C --&gt; D["Record event or notify task"]
+    D --&gt; E["Task becomes ready"]
+    E --&gt; F["Scheduler selects task"]
+    F --&gt; G["Process event"]</code></pre>
+<h3 id="figure-153-interrupt-driven-processing">Figure 1.5.3: Interrupt-driven processing<a class="headerlink" href="#figure-153-interrupt-driven-processing" title="Permanent link">&para;</a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Interrupts do not automatically guarantee immediate application-level processing.</p>
+<p>Interrupt latency, interrupt masking, scheduling, and other system activities can introduce delays.</p>
+<p>Interrupt handlers should generally perform only the necessary immediate work and leave longer processing to an appropriate task.</p>
+</div>
+<hr />
+<h2 id="158-why-can-timing-become-unpredictable">1.5.8 Why can timing become unpredictable?<a class="headerlink" href="#158-why-can-timing-become-unpredictable" title="Permanent link">&para;</a></h2>
+<p>Even with an RTOS, software execution may experience timing variation. Some of the common causes are:</p>
+<h3 id="1-higher-priority-tasks">1. Higher-priority tasks<a class="headerlink" href="#1-higher-priority-tasks" title="Permanent link">&para;</a></h3>
+<p>A lower-priority task may be interrupted when a higher-priority task becomes ready.</p>
+<h3 id="2-interrupt-handling">2. Interrupt handling<a class="headerlink" href="#2-interrupt-handling" title="Permanent link">&para;</a></h3>
+<p>Hardware interrupts require processor time.</p>
+<p>Depending on the system, they may delay normal task execution.</p>
+<h3 id="3-shared-resources">3. Shared resources<a class="headerlink" href="#3-shared-resources" title="Permanent link">&para;</a></h3>
+<p>Two tasks may need access to the same data or hardware resource.</p>
+<p>One task may have to wait until another releases the resource.</p>
+<h3 id="4-memory-management">4. Memory management<a class="headerlink" href="#4-memory-management" title="Permanent link">&para;</a></h3>
+<p>Operations such as dynamic memory allocation and page faults may introduce variable delays.</p>
+<h3 id="5-communication">5. Communication<a class="headerlink" href="#5-communication" title="Permanent link">&para;</a></h3>
+<p>Waiting for data from a peripheral or another computer may introduce delays.</p>
+<h3 id="6-hardware-and-system-behaviour">6. Hardware and system behaviour<a class="headerlink" href="#6-hardware-and-system-behaviour" title="Permanent link">&para;</a></h3>
+<p>Cache effects, memory access, firmware, and other hardware activities can influence timing.</p>
+<p>For instacne, if a motor-control task usually takes 3 ms to complete. However, it occassionally takes 9 ms because it is delayed by other system activity. If its deadline is 5 ms, those delayed executions violate the requirement.</p>
+<p>Simply using a faster processor does not necessarily eliminate every source of unpredictable delay.</p>
+<p>For demanding real-time applications, engineers must consider the entire software and hardware execution path.</p>
+<p>The ROS 2 real-time programming guidance specifically discusses avoiding unbounded blocking, page faults, and unpredictable memory operations in time-critical execution paths (<a href="https://design.ros2.org/articles/realtime_background.html" rel="noopener noreferrer" target="_blank">Read more: ROS 2 Design Documentation</a>).</p>
+<hr />
+<h2 id="159-comparing-windows-linux-freertos">1.5.9 Comparing Windows, Linux, &amp; FreeRTOS<a class="headerlink" href="#159-comparing-windows-linux-freertos" title="Permanent link">&para;</a></h2>
+<p>Different operating systems are suitable for different robotics applications.</p>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>Windows is a general-purpose operating system. It is widely used for:</p>
+<ul>
+<li>Robotics software development.</li>
+<li>Simulation.</li>
+<li>Data analysis.</li>
+<li>Graphical applications.</li>
+<li>Programming and testing.</li>
+</ul>
+<p>Standard Windows applications don't automatically receive hard real-time scheduling guarantees. </p>
+<h3 id="standard-linux">Standard Linux<a class="headerlink" href="#standard-linux" title="Permanent link">&para;</a></h3>
+<p>Linux is widely used in robotics because it supports:</p>
+<ul>
+<li>Programming and software development.</li>
+<li>Networking and communication.</li>
+<li>Robot middleware.</li>
+<li>Hardware interfaces.</li>
+<li>Robotics frameworks such as ROS 2.</li>
+</ul>
+<p>Standard Linux can run time-sensitive applications, but its default scheduling configuration does not automatically guarantee strict real-time deadlines.</p>
+<h3 id="linux-with-preempt_rt">Linux with PREEMPT_RT<a class="headerlink" href="#linux-with-preempt_rt" title="Permanent link">&para;</a></h3>
+<p>Linux can also be configured with real-time pre-emption support.</p>
+<p>The <strong>PREEMPT_RT</strong> approach reduces scheduling latency by making more kernel execution paths pre-emptible.</p>
+<p>This makes Linux more suitable for applications requiring predictable scheduling behaviour.</p>
+<p>However, a real-time Linux kernel does not guarantee that an incorrectly designed application will meet its deadlines.</p>
+<p>The Linux kernel documentation explains the changes introduced by PREEMPT_RT, including threaded interrupts and real-time locking mechanisms (<a href="https://www.kernel.org/doc/html/latest/core-api/real-time/theory.html" rel="noopener noreferrer" target="_blank">Read more: Real-time Pre-emption — Theory of Operation</a>).</p>
+<h3 id="freertos">FreeRTOS<a class="headerlink" href="#freertos" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS is a real-time operating-system kernel commonly used in microcontroller-based embedded systems. It provides mechanisms such as:</p>
+<ul>
+<li>Tasks.</li>
+<li>Priorities.</li>
+<li>Scheduling.</li>
+<li>Timers.</li>
+<li>Queues.</li>
+<li>Semaphores.</li>
+<li>Mutexes.</li>
+</ul>
+<p>It is suitable for many small embedded robotics controllers.</p>
+<p>For example, an ESP32 microcontroller can use FreeRTOS to organise sensor acquisition, motor control, and communication tasks.</p>
+<h3 id="comparison-table">Comparison table<a class="headerlink" href="#comparison-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>Windows</th>
+<th>Standard Linux</th>
+<th>Linux with PREEMPT_RT</th>
+<th>FreeRTOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main focus</td>
+<td>General computing</td>
+<td>General computing and embedded applications</td>
+<td>Linux with improved real-time behaviour</td>
+<td>Embedded real-time applications</td>
+</tr>
+<tr>
+<td>Typical hardware</td>
+<td>PCs</td>
+<td>PCs and embedded computers</td>
+<td>PCs and embedded computers</td>
+<td>Microcontrollers</td>
+</tr>
+<tr>
+<td>Multitasking</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Task priorities</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Real-time scheduling mechanisms</td>
+<td>Available, but standard applications lack hard real-time guarantees</td>
+<td>Available with suitable policies and configuration</td>
+<td>Enhanced real-time pre-emption</td>
+<td>Designed for real-time task scheduling</td>
+</tr>
+<tr>
+<td>Typical robotics use</td>
+<td>Development and simulation</td>
+<td>Robot computers and ROS 2</td>
+<td>Time-sensitive robot computing</td>
+<td>Embedded controllers</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An RTOS is not necessarily faster than a GPOS.</p>
+<p>Its advantage is the ability to support more predictable timing through appropriate scheduling and system design.</p>
+</div>
+<hr />
+<h2 id="1510-example-a-robot-with-two-computing-systems">1.5.10 Example: A robot with two computing systems<a class="headerlink" href="#1510-example-a-robot-with-two-computing-systems" title="Permanent link">&para;</a></h2>
+<p>While working on projects, we have already come across situations where a robot may contain both a general-purpose computer and a microcontroller.</p>
+<p>Consider a mobile robot equipped with:</p>
+<ul>
+<li>Raspberry Pi running Linux,</li>
+<li>an ESP32 microcontroller running FreeRTOS,</li>
+<li>a distance sensor,</li>
+<li>wheel encoders,</li>
+<li>motor drivers.</li>
+</ul>
+<p>The Raspberry Pi might perform: camera processing, mapping, path planning, user communication.</p>
+<p>The ESP32 might perform: wheel-speed control, encoder acquisition, motor-driver control, time-critical local monitoring.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Raspberry Pi&lt;br/&gt;Linux"]
+    B["ESP32&lt;br/&gt;FreeRTOS"]
+    C["Camera"]
+    D["User interface (UI)"]
+    E["Wheel encoders"]
+    F["Motor drivers"]
+    G["Motors"]
+
+    C --&gt; A
+    D &lt;--&gt; A
+    A &lt;--&gt;|"Commands and status"| B
+    E --&gt; B
+    B --&gt; F
+    F --&gt; G</code></pre>
+<h3 id="figure-154-computing-architecture-may-look-like">Figure 1.5.4: Computing architecture may look like<a class="headerlink" href="#figure-154-computing-architecture-may-look-like" title="Permanent link">&para;</a></h3>
+<p>This division allows the embedded controller to manage local timing requirements while the larger computer handles more computationally demanding operations.</p>
+<hr />
+<h2 id="1511-choosing-an-operating-system-approach">1.5.11 Choosing an operating-system approach<a class="headerlink" href="#1511-choosing-an-operating-system-approach" title="Permanent link">&para;</a></h2>
+<p>When selecting an operating system, engineers should consider:</p>
+<ol>
+<li>The required timing behaviour</li>
+<li>The processor and hardware platform</li>
+<li>The number and types of software tasks</li>
+<li>The consequences of missed deadlines</li>
+<li>Memory and processing constraints</li>
+<li>Communication requirements</li>
+<li>Development and maintenance needs</li>
+</ol>
+<p>This is a simplified decision guide. The operating system is only one component of the overall solution.</p>
+<hr />
+<!--
+## 1.5.12 What will we use in this course?
+
+In this course, we will explore real-time systems through both software-based exercises and hands-on embedded-system programming.
+
+This allows you to learn:
+
+- Timing measurements.
+- Periodic task execution.
+- Concurrent programming.
+- Task synchronisation.
+- Response-time evaluation.
+- Deadline checking.
+
+You will use standard C++ facilities such as:
+
+- `std::chrono`
+- `std::this_thread::sleep_for`
+- `std::thread`
+- `std::mutex`
+
+The optional hardware exercises will use ESP32 and FreeRTOS.
+
+These will demonstrate similar concepts in an embedded environment.
+
+### Important limitation
+
+A normal C++ program running on Windows or standard Linux can demonstrate real-time programming concepts.
+
+However, observing that a programme meets its deadlines during testing does not prove that it will always meet them under every operating condition.
+
+In this course, we will distinguish between:
+
+- **Measured timing behaviour**, and
+- **Verified timing guarantees**.
+
+This distinction is essential in real-time engineering.
+
+-->
+
+<hr />
+<!--
+## 1.5.13 Check your understanding
+
+### Question 1
+
+What is the main purpose of an operating-system scheduler?
+
+### Question 2
+
+A low-priority logging task is running when a high-priority motor-control task becomes ready.
+
+Explain what happens in a fixed-priority pre-emptive scheduler.
+
+### Question 3
+
+What is the difference between cooperative and pre-emptive scheduling?
+
+### Question 4
+
+A task is released at 2 ms but does not start until 8 ms.
+
+What is its waiting time?
+
+Give two possible reasons for the delay.
+
+### Question 5
+
+Explain the difference between polling and interrupts.
+
+Give one robotics example for each.
+
+### Question 6
+
+Why does using FreeRTOS not automatically guarantee that a robot meets every deadline?
+
+### Question 7
+
+A robot uses a Raspberry Pi for camera processing and an ESP32 for motor control.
+
+Explain why this architecture might be useful.
+
+### Question 8
+
+Is the following statement correct?
+
+"Linux cannot be used for real-time robotics applications."
+
+Explain your answer.
+
+---
+
+<!--
+## References and further reading
+
+[1] FreeRTOS. *Task Scheduling — Kernel Features.*
+[Official documentation](https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/01-Tasks-and-co-routines/04-Task-scheduling)
+
+[2] Open Robotics. *Introduction to Real-time Systems.*
+ROS 2 Design Documentation.
+[Read article](https://design.ros2.org/articles/realtime_background.html)
+
+[3] Linux Kernel Documentation. *Real-time Pre-emption — Theory of Operation.*
+[Official documentation](https://www.kernel.org/doc/html/latest/core-api/real-time/theory.html)
+
+### Further reading
+
+[4] FreeRTOS. *vTaskDelayUntil() — Task Control API.*
+[Official documentation](https://www.freertos.org/Documentation/02-Kernel/04-API-references/02-Task-control/02-vTaskDelayUntil)
+
+---
+-->
+
+<div class="chapter-nav">
+  <a href="../04-timing-concepts/">
+    ← Previous: 1.4 Timing Concepts in Real-Time Systems
+  </a>
+  <span class="separator">|</span>
+
+  <a href="../lab-1/">
+    Next: Continue to Lab Exercise 1 →
+  </a>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/password.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3172 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning resources for robotics engineering">
+      
+      
+      
+        <link rel="canonical" href="https://metropolia-robotics.github.io/metropolia-robotics/real-time-systems/module-2/01-sequential-concurrent/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../../module-3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>2.1 Sequential and Concurrent Programming - Robotics Learning Hub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#21-from-sequential-to-concurrent-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Robotics Learning Hub" class="md-header__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robotics Learning Hub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.1 Sequential and Concurrent Programming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Robotics Learning Hub" class="md-nav__button md-logo" aria-label="Robotics Learning Hub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robotics Learning Hub
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Courses
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Courses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-time Systems in Robotics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Real-time Systems in Robotics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - Foundations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/02-requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/03-real-time-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3 Real-time Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/04-timing-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.4 Timing Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/05-operating-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.5 Operating Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-1/lab-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 2 - Real-time Programming and Scheduling
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1 Sequential and Concurrent Programming
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1 Sequential and Concurrent Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#211-why-do-robots-need-to-perform-multiple-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1 Why do robots need to perform multiple activities?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-sequential-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2 Sequential programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.2 Sequential programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-example-1-sequential-robot-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example 1: Sequential robot operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code explanation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-sequential-programming-bad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is sequential programming bad?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-time-in-a-sequential-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution time in a sequential program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-if-motor-control-requires-a-10-ms-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What if motor control requires a 10 ms period?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-example-simulating-sequential-task-durations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example: Simulating sequential task durations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-and-execute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile and execute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-it-yourself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try it yourself
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-what-is-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3 What is concurrency?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.3 What is concurrency?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-a-robot-performing-multiple-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: A robot performing multiple activities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-concurrency-versus-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4 Concurrency versus parallelism
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.4 Concurrency versus parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallelism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-what-is-a-software-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5 What is a software task?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.5 What is a software task?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-versus-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task versus thread
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216-periodic-and-event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.6 Periodic and event-driven tasks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.6 Periodic and event-driven tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#periodic-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event-driven tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-approach-is-better" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which approach is better?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217-why-not-simply-use-one-large-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.7 Why not simply use one large loop?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.7 Why not simply use one large loop?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limitation-1-every-operation-delays-the-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 1: Every operation delays the next
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-2-different-periods-are-difficult-to-manage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 2: Different periods are difficult to manage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-3-blocking-operations-can-delay-the-entire-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 3: Blocking operations can delay the entire loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-4-timing-requirements-become-harder-to-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 4: Timing requirements become harder to analyse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-example-a-simple-cooperative-task-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example: A simple cooperative task loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-useful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this useful?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218-choosing-between-sequential-and-concurrent-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.8 Choosing between sequential and concurrent programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.8 Choosing between sequential and concurrent programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practical-decision-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical decision guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#219-example-selecting-an-approach-for-a-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.9 Example: Selecting an approach for a robot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.9 Example: Selecting an approach for a robot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#possible-improvement-1-cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible improvement 1: Cooperative scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-improvement-2-separate-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible improvement 2: Separate threads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-solution-should-we-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which solution should we choose?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-multithreading.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2 Multithreading in C++
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-periodic-scheduling.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3 Periodic Tasks and Scheduling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-shared-data.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4 Shared Data and Race Conditions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-synchronisation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.5 Synchronisation Mechanisms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2: Concurrent Robot Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3: Safe Sensor-data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../module-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 3 - Time-critical Robotics Application
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ros-sw-arch/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Operating Systems and Software Architectures
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Operating Systems and Software Architectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2_2" id="__nav_2_1_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ros-sw-arch/module-1/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robotics Software Project
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robotics Software Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../robotics-sw-prjct/module-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 1 - TODO
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 1 - TODO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#211-why-do-robots-need-to-perform-multiple-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1 Why do robots need to perform multiple activities?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-sequential-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2 Sequential programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.2 Sequential programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c-example-1-sequential-robot-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example 1: Sequential robot operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code explanation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-sequential-programming-bad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is sequential programming bad?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-time-in-a-sequential-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution time in a sequential program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-if-motor-control-requires-a-10-ms-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What if motor control requires a 10 ms period?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-example-simulating-sequential-task-durations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example: Simulating sequential task durations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-and-execute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile and execute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-it-yourself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try it yourself
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-what-is-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3 What is concurrency?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.3 What is concurrency?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-a-robot-performing-multiple-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: A robot performing multiple activities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-concurrency-versus-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4 Concurrency versus parallelism
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.4 Concurrency versus parallelism">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallelism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-what-is-a-software-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.5 What is a software task?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.5 What is a software task?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-versus-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task versus thread
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216-periodic-and-event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.6 Periodic and event-driven tasks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.6 Periodic and event-driven tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#periodic-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-driven-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event-driven tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-approach-is-better" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which approach is better?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217-why-not-simply-use-one-large-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.7 Why not simply use one large loop?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.7 Why not simply use one large loop?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limitation-1-every-operation-delays-the-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 1: Every operation delays the next
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-2-different-periods-are-difficult-to-manage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 2: Different periods are difficult to manage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-3-blocking-operations-can-delay-the-entire-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 3: Blocking operations can delay the entire loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitation-4-timing-requirements-become-harder-to-analyse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitation 4: Timing requirements become harder to analyse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-example-a-simple-cooperative-task-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C++ example: A simple cooperative task loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-is-this-useful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why is this useful?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218-choosing-between-sequential-and-concurrent-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.8 Choosing between sequential and concurrent programming
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.8 Choosing between sequential and concurrent programming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practical-decision-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical decision guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#219-example-selecting-an-approach-for-a-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.9 Example: Selecting an approach for a robot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.9 Example: Selecting an approach for a robot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#possible-improvement-1-cooperative-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible improvement 1: Cooperative scheduling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-improvement-2-separate-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible improvement 2: Separate threads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-solution-should-we-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which solution should we choose?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="21-from-sequential-to-concurrent-programming">2.1 From Sequential to Concurrent Programming<a class="headerlink" href="#21-from-sequential-to-concurrent-programming" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="211-why-do-robots-need-to-perform-multiple-activities">2.1.1 Why do robots need to perform multiple activities?<a class="headerlink" href="#211-why-do-robots-need-to-perform-multiple-activities" title="Permanent link">&para;</a></h2>
+<p>Consider an autonomous mobile robot moving through a laboratory.</p>
+<p>While moving, the robot must perform several activities:</p>
+<ol>
+<li>Read its distance sensor.</li>
+<li>Calculate the required motor speeds.</li>
+<li>Send commands to the motor drivers.</li>
+<li>Monitor the battery voltage.</li>
+<li>Record diagnostic information.</li>
+</ol>
+<p>Some activities need frequent execution, while others can occur less often.</p>
+<p>For example:</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align: right;">Example period</th>
+<th style="text-align: right;">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Motor control</td>
+<td style="text-align: right;">10 ms</td>
+<td style="text-align: right;">100 Hz</td>
+</tr>
+<tr>
+<td>Distance measurement</td>
+<td style="text-align: right;">50 ms</td>
+<td style="text-align: right;">20 Hz</td>
+</tr>
+<tr>
+<td>Battery monitoring</td>
+<td style="text-align: right;">500 ms</td>
+<td style="text-align: right;">2 Hz</td>
+</tr>
+<tr>
+<td>Data logging</td>
+<td style="text-align: right;">1000 ms</td>
+<td style="text-align: right;">1 Hz</td>
+</tr>
+</tbody>
+</table>
+<p>The motor controller may need frequent updates to maintain stable motion, whereas battery monitoring may not require such frequent execution. The challenge is to organise these activities so that each receives sufficient processor time and satisfies its timing requirements.</p>
+<p>A robot does not necessarily need multiple processor cores to handle these activities. Even a single-core processor can manage multiple tasks by switching between them.</p>
+<p>This leads us to the concepts of sequential execution, concurrency, and parallelism.</p>
+<hr />
+<h2 id="212-sequential-programming">2.1.2 Sequential programming<a class="headerlink" href="#212-sequential-programming" title="Permanent link">&para;</a></h2>
+<p>In <strong>sequential programming</strong>, instructions execute in a defined order within a single flow of execution.</p>
+<p>One operation must finish before the next operation begins.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>START
+  |
+  v
+Read distance sensor
+  |
+  v
+Calculate motor command
+  |
+  v
+Send motor command
+  |
+  v
+Record diagnostic data
+  |
+  v
+END
+</code></pre></div>
+<p>This is a sequential program.</p>
+<p>The program completes each operation before proceeding to the next.</p>
+<h3 id="c-example-1-sequential-robot-operations">C++ example 1: Sequential robot operations<a class="headerlink" href="#c-example-1-sequential-robot-operations" title="Permanent link">&para;</a></h3>
+<p>Consider the following C++ program:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">readSensor</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Reading distance sensor</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">controlMotor</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Calculating motor command</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">logData</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Recording diagnostic data</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">readSensor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">controlMotor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">logData</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="code-explanation">Code explanation<a class="headerlink" href="#code-explanation" title="Permanent link">&para;</a></h3>
+<p>The program contains three functions:</p>
+<ul>
+<li><code>readSensor()</code> represents sensor acquisition.</li>
+<li><code>controlMotor()</code> represents motor-control calculations.</li>
+<li><code>logData()</code> represents diagnostic logging.</li>
+</ul>
+<p>Inside <code>main()</code>, the functions are called sequentially.</p>
+<p>The output is:</p>
+<div class="highlight"><pre><span></span><code>Reading distance sensor
+Calculating motor command
+Recording diagnostic data
+</code></pre></div>
+<p>The execution order is fixed.</p>
+<p>The motor-control function cannot begin until <code>readSensor()</code> has returned.</p>
+<p>Similarly, <code>logData()</code> cannot begin until <code>controlMotor()</code> has returned.</p>
+<h3 id="is-sequential-programming-bad">Is sequential programming bad?<a class="headerlink" href="#is-sequential-programming-bad" title="Permanent link">&para;</a></h3>
+<p>No.</p>
+<p>Sequential programming is often the simplest &amp; most appropriate/optimal solution for small applications. E.g., a robot that performs one short sensor reading, one calculation &amp; one motor update in a predictable cycle may work well using a sequential program.</p>
+<p>However, problems can arise when operations have different execution times or timing requirements.</p>
+<hr />
+<h3 id="execution-time-in-a-sequential-program">Execution time in a sequential program<a class="headerlink" href="#execution-time-in-a-sequential-program" title="Permanent link">&para;</a></h3>
+<p>From the above example, let's suppose the those three operations take:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th style="text-align: right;">Execution time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read sensor</td>
+<td style="text-align: right;">8 ms</td>
+</tr>
+<tr>
+<td>Calculate motor command</td>
+<td style="text-align: right;">4 ms</td>
+</tr>
+<tr>
+<td>Record data</td>
+<td style="text-align: right;">12 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Assuming the operations execute continuously without interruption and that other overheads are negligible/ignored.</p>
+<p>The total execution time is:</p>
+<div class="arithmatex">\[
+C_{\text{total}} = C_{\text{sensor}} + C_{\text{control}} + C_{\text{logging}}
+\]</div>
+<p>Substituting the values:</p>
+<div class="arithmatex">\[
+C_{\text{total}} = 8 + 4 + 12
+\]</div>
+<div class="arithmatex">\[
+\boxed{C_{\text{total}} = 24\ \text{ms}}
+\]</div>
+<p>If the program repeats these operations continuously, one complete cycle requires at least 24 ms under these assumptions.</p>
+<h3 id="what-if-motor-control-requires-a-10-ms-period">What if motor control requires a 10 ms period?<a class="headerlink" href="#what-if-motor-control-requires-a-10-ms-period" title="Permanent link">&para;</a></h3>
+<p>Suppose the motor controller must execute every 10 ms. A sequential program that performs all three operations once per cycle can't meet that period if the operations require 24 ms in total.</p>
+<p>Even though the motor-control calculation itself requires only 4 ms, the other operations delay its next execution.</p>
+<p>This is an important distinction:</p>
+<p><strong>A task's timing behaviour depends not only on its own execution time, but also on how other activities are organised.</strong></p>
+<pre class="mermaid"><code>gantt
+    title Sequential execution of robot operations
+    dateFormat X
+    axisFormat %s
+    section Processor
+    Sensor acquisition :a, 0, 8
+    Motor control      :b, 8, 12
+    Data logging       :c, 12, 24</code></pre>
+<p><em>Figure 2.1.1: Illustrative sequential execution on a single processor core. The values represent milliseconds from the beginning of the cycle.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The diagram assumes uninterrupted execution and excludes operating-system scheduling overhead.</p>
+<p>Real execution times may vary.</p>
+</div>
+<hr />
+<h3 id="c-example-simulating-sequential-task-durations">C++ example: Simulating sequential task durations<a class="headerlink" href="#c-example-simulating-sequential-task-durations" title="Permanent link">&para;</a></h3>
+<p>We can use C++ to simulate the time taken by different robot operations.</p>
+<p>Create a file named:</p>
+<p><code>sequential_robot.cpp</code></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thread&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">readSensor</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Reading sensor...</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">controlMotor</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Calculating motor command...</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">logData</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Logging data...</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Clock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">readSensor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">controlMotor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">logData</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">finish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">elapsed_ms</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">milli</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">            </span><span class="n">finish</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span>
+<span class="w">        </span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Total elapsed time: "</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">elapsed_ms</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" ms</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="compile-and-execute">Compile and execute<a class="headerlink" href="#compile-and-execute" title="Permanent link">&para;</a></h3>
+<p>Using a C++17-compatible GCC compiler:</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-O0<span class="w"> </span>sequential_robot.cpp<span class="w"> </span>-o<span class="w"> </span>sequential_robot
+</code></pre></div>
+<p>On Windows PowerShell:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">sequential_robot</span><span class="p">.</span><span class="n">exe</span>
+</code></pre></div>
+<p>On Linux or macOS:</p>
+<div class="highlight"><pre><span></span><code>./sequential_robot
+</code></pre></div>
+<h3 id="expected-behaviour">Expected behaviour<a class="headerlink" href="#expected-behaviour" title="Permanent link">&para;</a></h3>
+<p>The program prints messages in the same order as the function calls.</p>
+<p>The total elapsed time will normally be approximately 24 ms or longer.</p>
+<p>However, the measured duration may vary because of:</p>
+<ul>
+<li>Operating-system scheduling,</li>
+<li>Thread wake-up delays,</li>
+<li>Console output,</li>
+<li>Other system activities.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Important measurement distinction</p>
+<p><code>std::this_thread::sleep_for()</code> suspends the current thread.</p>
+<p>It does not perform CPU-intensive calculations for the requested duration.</p>
+<p>Therefore, this example simulates <strong>elapsed operation durations</strong>, not actual CPU execution times.</p>
+<p>The example is intended to demonstrate sequential waiting and timing, not to measure processor workload.</p>
+</div>
+<h3 id="try-it-yourself">Try it yourself<a class="headerlink" href="#try-it-yourself" title="Permanent link">&para;</a></h3>
+<p>Modify the program so that:</p>
+<ol>
+<li>Sensor acquisition takes 5 ms.</li>
+<li>Motor control takes 3 ms.</li>
+<li>Logging takes 20 ms.</li>
+</ol>
+<p>Before running the program, calculate the expected total delay. Run the program five times. Does the measured elapsed time equal exactly 28 ms?</p>
+<p>Explain any differences.</p>
+<hr />
+<h2 id="213-what-is-concurrency">2.1.3 What is concurrency?<a class="headerlink" href="#213-what-is-concurrency" title="Permanent link">&para;</a></h2>
+<p><strong>Concurrency</strong> means that multiple activities can make progress during overlapping periods of time.</p>
+<p>The activities do not necessarily execute at precisely the same instant.</p>
+<p>For example, consider a single-core processor running:</p>
+<ul>
+<li>Task A: Sensor processing.</li>
+<li>Task B: Motor control.</li>
+<li>Task C: Data logging.</li>
+</ul>
+<p>The processor might execute a short portion of Task A, switch to Task B, then execute Task C before returning to Task A.</p>
+<p>Only one task executes on the processor core at a particular instant, but all three tasks make progress over time.</p>
+<p>This is called <strong>concurrent execution</strong>.</p>
+<h3 id="example-a-robot-performing-multiple-activities">Example: A robot performing multiple activities<a class="headerlink" href="#example-a-robot-performing-multiple-activities" title="Permanent link">&para;</a></h3>
+<p>A mobile robot may need to continue controlling its motors while periodically receiving sensor measurements.</p>
+<p>Instead of executing all activities in one long sequential cycle, the program can organise them as separate tasks.</p>
+<p>The operating system can then schedule the tasks according to its scheduling policy.</p>
+<p><div class="highlight"><pre><span></span><code>Time  --------------------------------------------------&gt;
+
+CPU    | Sensor | Motor | Logger | Motor | Sensor | Motor |
+</code></pre></div>
+<em>Figure 2.1.2: Concurrent execution on a single-core processor</em></p>
+<p>The processor executes one task at a time, but switches between tasks.</p>
+<p>The tasks are concurrent because their execution progresses over overlapping periods.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Concurrency does not automatically mean that the program runs faster.</p>
+<p>Its main benefit is allowing multiple activities to be organised and scheduled independently.</p>
+<p>Whether timing performance improves depends on the task design, scheduling policy and hardware. FreeRTOS. <em>RTOS Fundamentals and Task Scheduling. (<a href="https://education.freertos.org/Documentation/01-FreeRTOS-quick-start/01-Beginners-guide/01-RTOS-fundamentals">Read more: RTOS Fundamentals</a>)</em></p>
+</div>
+<hr />
+<h2 id="214-concurrency-versus-parallelism">2.1.4 Concurrency versus parallelism<a class="headerlink" href="#214-concurrency-versus-parallelism" title="Permanent link">&para;</a></h2>
+<p>The terms <em>concurrency</em> and <em>parallelism</em> are related but describe different concepts.</p>
+<h3 id="concurrency">Concurrency<a class="headerlink" href="#concurrency" title="Permanent link">&para;</a></h3>
+<p>Multiple activities make progress over overlapping periods.</p>
+<p>On a single-core processor, this can happen through task switching.</p>
+<h3 id="parallelism">Parallelism<a class="headerlink" href="#parallelism" title="Permanent link">&para;</a></h3>
+<p>Multiple activities execute simultaneously on different processing resources.</p>
+<p>For example, a processor with multiple cores may execute sensor processing on one core and motor control on another at the same instant.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<p>Suppose a robot has two software tasks:</p>
+<ul>
+<li>Task A processes sensor measurements.</li>
+<li>Task B calculates motor commands.</li>
+</ul>
+<p>On a single-core processor, the operating system may alternate between the tasks.</p>
+<p>On a multicore processor, the tasks may execute simultaneously if the scheduler places them on different cores.</p>
+<h3 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>Concurrency</th>
+<th>Parallelism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multiple activities can make progress</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Simultaneous execution required</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Possible on a single-core processor</td>
+<td>Yes</td>
+<td>Not for two CPU-executing threads simultaneously on the same core</td>
+</tr>
+<tr>
+<td>Multiple processor cores required</td>
+<td>No</td>
+<td>Multiple execution resources are needed for simultaneous CPU execution</td>
+</tr>
+<tr>
+<td>Main idea</td>
+<td>Managing overlapping activities</td>
+<td>Executing activities simultaneously</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Remember</p>
+<p><strong>Concurrency is about organising multiple activities.</strong></p>
+<p><strong>Parallelism is about executing multiple activities at the same time.</strong></p>
+<p>A program can be concurrent without being parallel.</p>
+</div>
+<p>Reference: [2].</p>
+<hr />
+<h2 id="215-what-is-a-software-task">2.1.5 What is a software task?<a class="headerlink" href="#215-what-is-a-software-task" title="Permanent link">&para;</a></h2>
+<p>In robotics, a <strong>task</strong> is a logical unit of work that performs a particular function.</p>
+<p>Examples include:</p>
+<ul>
+<li>Reading a distance sensor.</li>
+<li>Updating a motor controller.</li>
+<li>Monitoring battery voltage.</li>
+<li>Processing camera measurements.</li>
+<li>Recording diagnostic information.</li>
+</ul>
+<p>A task may execute:</p>
+<ul>
+<li>Periodically.</li>
+<li>In response to an event.</li>
+<li>Once when requested.</li>
+</ul>
+<p>The word <em>task</em> is used somewhat differently across programming environments.</p>
+<p>In real-time operating systems such as FreeRTOS, a task is a schedulable execution entity managed by the RTOS.</p>
+<p>In general-purpose C++ programming, we can organise logical tasks using functions and execute them through threads.</p>
+<h3 id="task-versus-thread">Task versus thread<a class="headerlink" href="#task-versus-thread" title="Permanent link">&para;</a></h3>
+<p>A <strong>task</strong> describes the work that needs to be performed.</p>
+<p>A <strong>thread</strong> is an execution mechanism that allows a sequence of instructions to run independently within a process.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">sensorTask</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Read and process sensor data.</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This function represents a logical sensor task.</p>
+<p>However, simply defining the function does not create a separate thread.</p>
+<p>Calling it normally:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sensorTask</span><span class="p">();</span>
+</code></pre></div>
+<p>executes it in the calling thread.</p>
+<p>Later, we can create a separate thread using:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="w"> </span><span class="nf">sensorThread</span><span class="p">(</span><span class="n">sensorTask</span><span class="p">);</span>
+</code></pre></div>
+<p>The <code>sensorTask()</code> function can then execute in the newly created thread.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C++, <code>std::thread</code> is available from C++11 onwards.</p>
+<p>It allows programrs to create separate threads of execution within a process (<a href="https://en.cppreference.com/w/cpp/thread/thread">Read more: <em>std::thread — C++ Reference.</em></a>).</p>
+</div>
+<hr />
+<h2 id="216-periodic-and-event-driven-tasks">2.1.6 Periodic and event-driven tasks<a class="headerlink" href="#216-periodic-and-event-driven-tasks" title="Permanent link">&para;</a></h2>
+<p>Robotic software commonly contains both periodic and event-driven activities.</p>
+<h3 id="periodic-tasks">Periodic tasks<a class="headerlink" href="#periodic-tasks" title="Permanent link">&para;</a></h3>
+<p>A periodic task is intended to execute repeatedly at regular intervals.</p>
+<p>Examples:</p>
+<ul>
+<li>Read an encoder every 10 ms.</li>
+<li>Update motor commands every 20 ms.</li>
+<li>Monitor battery voltage every 500 ms.</li>
+</ul>
+<p>The task period is represented by:</p>
+<div class="arithmatex">\[
+T
+\]</div>
+<p>Its frequency is:</p>
+<div class="arithmatex">\[
+f = \frac{1}{T}
+\]</div>
+<p>For example:</p>
+<div class="arithmatex">\[
+T = 20\ \text{ms} = 0.020\ \text{s}
+\]</div>
+<div class="arithmatex">\[
+f = \frac{1}{0.020}
+\]</div>
+<div class="arithmatex">\[
+\boxed{f = 50\ \text{Hz}}
+\]</div>
+<h3 id="event-driven-tasks">Event-driven tasks<a class="headerlink" href="#event-driven-tasks" title="Permanent link">&para;</a></h3>
+<p>An event-driven task executes when a particular event occurs.</p>
+<p>Examples:</p>
+<ul>
+<li>A user presses an emergency-stop button.</li>
+<li>A new message arrives.</li>
+<li>A sensor reports that data is available.</li>
+<li>A communication timeout occurs.</li>
+</ul>
+<p>Unlike a periodic task, an event-driven task does not necessarily execute at fixed intervals.</p>
+<h3 id="which-approach-is-better">Which approach is better?<a class="headerlink" href="#which-approach-is-better" title="Permanent link">&para;</a></h3>
+<p>Neither is universally better. Periodic execution is useful when regular updates are required. Event-driven execution is useful when processing should occur in response to specific events. Many robotic systems use a combination of both. E.g., a motor controller may update periodically, while a communication task waits for incoming commands.</p>
+<p>FreeRTOS provides task scheduling and blocking mechanisms that support these types of applications.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>An event-driven design does not automatically provide immediate response.</p>
+<p>The event must still be detected and the corresponding task scheduled.</p>
+</div>
+<hr />
+<h2 id="217-why-not-simply-use-one-large-loop">2.1.7 Why not simply use one large loop?<a class="headerlink" href="#217-why-not-simply-use-one-large-loop" title="Permanent link">&para;</a></h2>
+<p>A beginner might organise all robot activities inside a single <code>while</code> loop.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">readSensor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">controlMotor</span><span class="p">();</span>
+<span class="w">    </span><span class="n">checkBattery</span><span class="p">();</span>
+<span class="w">    </span><span class="n">logData</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This approach is easy to understand.</p>
+<p>However, it has several limitations.</p>
+<h3 id="limitation-1-every-operation-delays-the-next">Limitation 1: Every operation delays the next<a class="headerlink" href="#limitation-1-every-operation-delays-the-next" title="Permanent link">&para;</a></h3>
+<p>If <code>logData()</code> takes a long time, the next sensor reading and motor-control calculation are delayed.</p>
+<h3 id="limitation-2-different-periods-are-difficult-to-manage">Limitation 2: Different periods are difficult to manage<a class="headerlink" href="#limitation-2-different-periods-are-difficult-to-manage" title="Permanent link">&para;</a></h3>
+<p>Motor control may need to run every 10 ms, while battery monitoring may only be needed every 500 ms.</p>
+<p>Calling every function once per loop does not naturally satisfy these different timing requirements.</p>
+<h3 id="limitation-3-blocking-operations-can-delay-the-entire-loop">Limitation 3: Blocking operations can delay the entire loop<a class="headerlink" href="#limitation-3-blocking-operations-can-delay-the-entire-loop" title="Permanent link">&para;</a></h3>
+<p>Suppose <code>readSensor()</code> waits for a sensor response.</p>
+<p>While it is waiting, the other functions cannot execute in that same thread.</p>
+<h3 id="limitation-4-timing-requirements-become-harder-to-analyse">Limitation 4: Timing requirements become harder to analyse<a class="headerlink" href="#limitation-4-timing-requirements-become-harder-to-analyse" title="Permanent link">&para;</a></h3>
+<p>When many activities share one sequential execution path, a delay in one operation affects the timing of the others.</p>
+<p>However, it doesn't automatically mean one loop is always unsuitable. A carefully designed single-loop program can be suitable for simple embedded systems. E.g., a cooperative scheduler can use a single loop to execute short operations when their scheduled times arrive.</p>
+<p>The important requirement is that operations must not block or execute unpredictably for too long. For more complex applications, separating activities into independently scheduled tasks can make the design easier to organise.</p>
+<hr />
+<h3 id="c-example-a-simple-cooperative-task-loop">C++ example: A simple cooperative task loop<a class="headerlink" href="#c-example-a-simple-cooperative-task-loop" title="Permanent link">&para;</a></h3>
+<p>Before introducing multiple threads, we can improve a sequential program by giving different operations their own intended periods.</p>
+<p>This example uses a single thread (<strong>not multithreaded programming</strong>).</p>
+<p>Create a file named:</p>
+<p><code>cooperative_robot.cpp</code></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thread&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Clock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sensor_period</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">motor_period</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">next_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">next_motor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">end_time</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">now</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end_time</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">next_sensor</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Sensor update</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">next_sensor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sensor_period</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">next_motor</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Motor update</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">next_motor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">motor_period</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The program contains two logical activities:</p>
+<ol>
+<li>Sensor update every 50 ms.</li>
+<li>Motor update every 20 ms.</li>
+</ol>
+<p>The variable: <code>next_sensor</code> stores the intended time of the next sensor update.</p>
+<p>Similarly <code>next_motor</code> stores the intended time of the next motor update.</p>
+<p>The conditions <code>if (now &gt;= next_sensor)</code> and <code>if (now &gt;= next_motor)</code> check whether the corresponding activity is due.</p>
+<p>After an activity is executed, its next scheduled time is advanced by one period.</p>
+<h3 id="why-is-this-useful">Why is this useful?<a class="headerlink" href="#why-is-this-useful" title="Permanent link">&para;</a></h3>
+<p>The program does not need to call every function on every iteration. Each logical activity has its own intended period. This is a basic form of cooperative, time-triggered task organisation.</p>
+<h3 id="important-limitations">Important limitations<a class="headerlink" href="#important-limitations" title="Permanent link">&para;</a></h3>
+<p>The program still uses only one thread.</p>
+<p>Therefore:</p>
+<ul>
+<li>A long sensor operation can delay the motor update.</li>
+<li>Both activities cannot execute simultaneously.</li>
+<li>The operating system may delay the loop.</li>
+<li>The 1 ms sleep can introduce additional timing variation.</li>
+<li>If the program falls behind schedule, overdue activities may execute in successive loop iterations.</li>
+</ul>
+<p>The program is deliberately simple and does not implement a complete overrun-handling policy.</p>
+<h2 id="218-choosing-between-sequential-and-concurrent-programming">2.1.8 Choosing between sequential and concurrent programming<a class="headerlink" href="#218-choosing-between-sequential-and-concurrent-programming" title="Permanent link">&para;</a></h2>
+<p>Concurrency is useful when an application contains activities with different timing requirements or operations that may block independently. However, concurrency introduces additional complexity. E.g., multiple threads may need to access the same sensor data. If they access shared data without appropriate coordination, incorrect or inconsistent results may occur.</p>
+<p>These problems are called <strong>race conditions</strong> and will be studied in later chapters.</p>
+<h3 id="practical-decision-guide">Practical decision guide<a class="headerlink" href="#practical-decision-guide" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TD
+    A["Identify robot software activities"] --&gt; B{"Can a simple sequential design meet the requirements?"}
+    B --&gt;|"Yes"| C["Use a simple sequential design"]
+    B --&gt;|"No"| D{"Can short non-blocking operations be scheduled cooperatively?"}
+    D --&gt;|"Yes"| E["Consider a cooperative task loop"]
+    D --&gt;|"No"| F["Consider independently scheduled threads or RTOS tasks"]
+    C --&gt; G["Measure and verify timing"]
+    E --&gt; G
+    F --&gt; H["Design safe communication and synchronisation"]
+    H --&gt; G</code></pre>
+<p>The choice should be based on measured timing requirements, system complexity and hardware capabilities.</p>
+<p>Do not introduce concurrency merely because it is available.</p>
+<hr />
+<h2 id="219-example-selecting-an-approach-for-a-robot">2.1.9 Example: Selecting an approach for a robot<a class="headerlink" href="#219-example-selecting-an-approach-for-a-robot" title="Permanent link">&para;</a></h2>
+<p>A small robot performs the following activities:</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align: right;">Period</th>
+<th style="text-align: right;">Typical processing duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read distance sensor</td>
+<td style="text-align: right;">50 ms</td>
+<td style="text-align: right;">5 ms</td>
+</tr>
+<tr>
+<td>Calculate motor command</td>
+<td style="text-align: right;">20 ms</td>
+<td style="text-align: right;">3 ms</td>
+</tr>
+<tr>
+<td>Record diagnostic data</td>
+<td style="text-align: right;">500 ms</td>
+<td style="text-align: right;">15 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose all three functions are executed sequentially in one repeated cycle.</p>
+<p>The combined processing duration is:</p>
+<div class="arithmatex">\[
+C_{\text{total}} = 5 + 3 + 15
+\]</div>
+<div class="arithmatex">\[
+\boxed{C_{\text{total}} = 23\ \text{ms}}
+\]</div>
+<p>If every activity executes once per cycle, the motor-control function cannot achieve a 20 ms start-to-start period in this design.</p>
+<h3 id="possible-improvement-1-cooperative-scheduling">Possible improvement 1: Cooperative scheduling<a class="headerlink" href="#possible-improvement-1-cooperative-scheduling" title="Permanent link">&para;</a></h3>
+<p>Execute the functions only when their intended periods are reached.</p>
+<p>This may be sufficient if:</p>
+<ul>
+<li>All operations are short.</li>
+<li>Operations do not block unpredictably.</li>
+<li>The resulting timing measurements satisfy the requirements.</li>
+</ul>
+<h3 id="possible-improvement-2-separate-threads">Possible improvement 2: Separate threads<a class="headerlink" href="#possible-improvement-2-separate-threads" title="Permanent link">&para;</a></h3>
+<p>Use independently scheduled threads for:</p>
+<ul>
+<li>Sensor acquisition.</li>
+<li>Motor control.</li>
+<li>Logging.</li>
+</ul>
+<p>This allows the operating system to schedule the activities separately.</p>
+<p>However, shared data must be handled safely.</p>
+<h3 id="which-solution-should-we-choose">Which solution should we choose?<a class="headerlink" href="#which-solution-should-we-choose" title="Permanent link">&para;</a></h3>
+<p>There is not enough information to guarantee that either approach will satisfy every deadline.</p>
+<p>We would need to know:</p>
+<ul>
+<li>Worst-case execution times.</li>
+<li>Deadlines.</li>
+<li>Blocking behaviour.</li>
+<li>Scheduling policy.</li>
+<li>Hardware and operating-system characteristics.</li>
+</ul>
+<p>The appropriate engineering approach is to implement a suitable design, measure its behaviour, and assess whether the timing requirements are satisfied. For strict timing guarantees, additional analysis, and validation may be required.</p>
+<hr />
+<!--
+## 2.1.10 Check your understanding
+
+### Question 1
+
+Explain sequential programming in your own words.
+
+### Question 2
+
+What is the difference between concurrency and parallelism?
+
+### Question 3
+
+Can a single-core processor execute multiple software tasks concurrently?
+
+Explain how.
+
+### Question 4
+
+A robot performs three sequential operations:
+
+- Sensor processing: 6 ms.
+- Motor control: 4 ms.
+- Data logging: 10 ms.
+
+Assuming uninterrupted execution and negligible overhead, calculate the total cycle time.
+
+### Question 5
+
+Why might a single sequential loop be unsuitable for a robot whose motor controller requires frequent updates?
+
+### Question 6
+
+What is the difference between a logical software task and a C++ thread?
+
+### Question 7
+
+Give two examples of periodic tasks and two examples of event-driven tasks in robotics.
+
+### Question 8
+
+Does creating multiple threads automatically guarantee that a robot meets its deadlines?
+
+Explain your answer.
+
+### Question 9
+
+In the cooperative C++ example, what is the purpose of the variables `next_sensor` and `next_motor`?
+
+### Question 10
+
+Why might concurrent programming introduce new problems when multiple tasks share sensor data?
+
+---
+
+## Chapter summary
+
+In this chapter, you learned that:
+
+1. Sequential programs execute operations in a defined order.
+2. Long operations can delay other activities in a sequential program.
+3. Concurrency allows multiple activities to make progress over overlapping periods.
+4. Parallelism involves simultaneous execution on separate processing resources.
+5. A single-core processor can support concurrency through task switching.
+6. A software task represents a logical unit of work.
+7. Threads provide an execution mechanism for concurrent programming.
+8. Periodic tasks execute according to intended time intervals.
+9. Event-driven tasks respond to specific events.
+10. Cooperative scheduling can organise multiple activities within a single thread.
+11. Concurrent programming can improve task organisation but introduces additional complexity.
+12. Timing requirements must be verified rather than assumed.
+
+---
+
+## References and further reading
+
+
+
+
+[3] FreeRTOS. *Task Scheduling — Kernel Features.*
+[Official documentation](https://training.freertos.org/Documentation/02-Kernel/02-Kernel-features/01-Tasks-and-co-routines/04-Task-scheduling)
+
+[4] ISO C++ Core Guidelines. *Concurrency and Parallelism.*
+[Read guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-concurrency)
+
+---
+-->
+<p><a href="../">Previous: Module 2 Overview</a> |
+<a href="02-multithreading.md">Next: 2.2 Multithreading in C++</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/password.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

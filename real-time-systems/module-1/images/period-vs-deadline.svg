@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="390" viewBox="0 0 1000 390" role="img" aria-labelledby="title desc">
+<title id="title">Figure 1.4.2 — Period versus deadline</title><desc id="desc">Three periodic task releases at 0, 20 and 40 milliseconds, with deadlines 12 milliseconds after each release.</desc>
+<rect width="1000" height="390" fill="#fff"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#172334}.head{font-size:25px;font-weight:700}.label{font-size:18px;font-weight:600}.small{font-size:17px}.axis{stroke:#263747;stroke-width:2}.release{stroke:#357AB7;stroke-width:3}.deadline{stroke:#C04444;stroke-width:3;stroke-dasharray:7 5}</style>
+<text class="head" x="40" y="45">Figure 1.4.2 — Period versus deadline</text>
+<text class="small" x="40" y="84">Example: period T = 20 ms; relative deadline D = 12 ms</text>
+<line class="axis" x1="80" y1="220" x2="950" y2="220"/><path d="M950 220l-10 -6v12z" fill="#263747"/>
+<g><rect x="80" y="165" width="174" height="50" rx="5" fill="#BCE8DF"/><rect x="370" y="165" width="174" height="50" rx="5" fill="#BCE8DF"/><rect x="660" y="165" width="174" height="50" rx="5" fill="#BCE8DF"/></g>
+<g class="label" text-anchor="middle"><text x="167" y="195">Instance 1</text><text x="457" y="195">Instance 2</text><text x="747" y="195">Instance 3</text></g>
+<g class="release"><path d="M80 140V245 M370 140V245 M660 140V245 M950 140V245"/></g>
+<g class="deadline"><path d="M254 140V245 M544 140V245 M834 140V245"/></g>
+<g class="small" text-anchor="middle"><text x="80" y="273">0 ms</text><text x="370" y="273">20 ms</text><text x="660" y="273">40 ms</text><text x="950" y="273">60 ms</text><text x="167" y="127">Deadline at 12 ms</text><text x="457" y="127">Deadline at 32 ms</text><text x="747" y="127">Deadline at 52 ms</text></g>
+<g stroke="#263747" stroke-width="2" fill="none"><path d="M80 298V310H370V298"/><path d="M370 298V310H660V298"/></g>
+<g class="label" text-anchor="middle"><text x="225" y="339">T = 20 ms</text><text x="515" y="339">T = 20 ms</text></g>
+<text class="small" x="950" y="373" text-anchor="end">Time →</text>
+</svg>

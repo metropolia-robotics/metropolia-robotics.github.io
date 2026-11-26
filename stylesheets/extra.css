@@ -1,0 +1,40 @@
+
+/* Chapter navigation */
+.chapter-nav {
+    margin-top: 3rem;
+    padding: 1.25rem 1rem;
+    border-top: 2px solid var(--md-default-fg-color--lightest);
+    background-color: var(--md-code-bg-color);
+    border-radius: 6px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    text-align: center;
+}
+
+.chapter-nav a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.chapter-nav a:hover {
+    text-decoration: underline;
+}
+
+.chapter-nav .separator {
+    color: var(--md-default-fg-color--lighter);
+}
+
+@media (max-width: 600px) {
+    .chapter-nav {
+        flex-direction: column;
+    }
+
+    .chapter-nav .separator {
+        display: none;
+    }
+}

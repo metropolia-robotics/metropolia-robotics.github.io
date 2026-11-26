@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="390" viewBox="0 0 1000 390" role="img" aria-labelledby="title desc">
+<title id="title">Figure 1.4.1 — Anatomy of a task instance</title><desc id="desc">Timeline showing release, waiting, start, execution, completion, deadline, response time and deadline margin.</desc>
+<rect width="1000" height="390" fill="#ffffff"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#172334}.head{font-size:25px;font-weight:700}.label{font-size:19px;font-weight:600}.small{font-size:17px}.tick{stroke:#263747;stroke-width:2}.bracket{stroke:#263747;stroke-width:2;fill:none}</style>
+<text class="head" x="40" y="45">Figure 1.4.1 — Anatomy of a task instance</text>
+<text class="label" x="95" y="105" text-anchor="middle">Release</text><text class="label" x="330" y="105" text-anchor="middle">Start</text><text class="label" x="730" y="105" text-anchor="middle">Completion</text><text class="label" x="925" y="105" text-anchor="middle">Deadline</text>
+<rect x="95" y="140" width="235" height="64" rx="4" fill="#FBE6B7"/><rect x="330" y="140" width="400" height="64" rx="4" fill="#BCE8DF"/><rect x="730" y="140" width="195" height="64" rx="4" fill="#E6EAF0"/>
+<text class="label" x="212" y="180" text-anchor="middle">Waiting</text><text class="label" x="530" y="180" text-anchor="middle">Executing</text><text class="label" x="827" y="180" text-anchor="middle">Margin</text>
+<path class="tick" d="M95 125V220 M330 125V220 M730 125V220"/><path d="M925 125V220" stroke="#C04444" stroke-width="3" stroke-dasharray="8 6"/>
+<path class="bracket" d="M95 237V250H730V237"/><text class="small" x="412" y="276" text-anchor="middle">Response time (release → completion)</text>
+<path class="bracket" d="M95 300V313H925V300"/><text class="small" x="510" y="342" text-anchor="middle">Relative deadline (release → deadline)</text>
+<text class="small" x="950" y="365" text-anchor="end" fill="#4A5969">Time →</text>
+</svg>
